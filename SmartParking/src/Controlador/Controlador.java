@@ -52,7 +52,7 @@ public class Controlador  {
         ModelVehiculo.setPlaca(Placa.getText());
         ModelVehiculo.setNombre(User.getText());
         
-        asignacion.AsignarEspacios();
+        asignacion.AsignandoEspacios(ModelVehiculo.getNombre(),ModelVehiculo.getPlaca());
         
         
     }

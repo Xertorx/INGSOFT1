@@ -19,7 +19,7 @@ public class AsignarEspacios {
         }
     }
 
-    public boolean assignSpace(int spaceNumber, String vehiclePlate, String ownerName) {
+    public boolean AsignandoEspacios(int spaceNumber, String vehiclePlate, String ownerName) {
         if (spaceNumber < 1 || spaceNumber > TOTAL_SPACES) {
             System.out.println("Número de espacio inválido.");
             return false;
