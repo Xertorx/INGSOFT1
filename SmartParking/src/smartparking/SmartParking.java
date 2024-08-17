@@ -4,11 +4,9 @@
  */
 package smartparking;
 
+import Modelo.AsignarEspacios;
 import Vista.Login;
-import com.formdev.flatlaf.FlatLightLaf;
-import com.formdev.flatlaf.intellijthemes.FlatCarbonIJTheme;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
+
 import javax.swing.UnsupportedLookAndFeelException;
 
 /**
@@ -25,10 +23,30 @@ public class SmartParking {
        //FlatLightLaf.setup();
        //UIManager.setLookAndFeel(new FlatLightLaf());
        //UIManager.put( "TextComponent.arc", 50);
-
       //SwingUtilities.updateComponentTreeUI(Login);
 
         Login.setVisible(true);
+        
+       
+        AsignarEspacios parkingLot = new AsignarEspacios();
+
+         // Mostrar estado inicial
+        parkingLot.displayStatus();
+
+        // Asignar espacios
+        parkingLot.AsignandoEspacios(5, "ABC123", "Juan Pérez");
+        parkingLot.AsignandoEspacios(10, "XYZ789", "Ana Gómez");
+
+        // Mostrar estado después de asignar
+        parkingLot.displayStatus();
+
+        // Liberar un espacio
+        parkingLot.releaseSpace(5);
+
+        // Mostrar estado después de liberar
+        parkingLot.displayStatus();
     }
+        
+        
     
 }

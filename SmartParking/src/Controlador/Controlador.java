@@ -4,14 +4,15 @@
  */
 package Controlador;
 
+import Modelo.AsignarEspacios;
 import Modelo.Usuario;
+import Modelo.Vehiculo;
 import Vista.Login;
-import static Vista.Login.Password;
-import static Vista.Login.Usuario;
+import static Vista.Login.*;
 import Vista.Menu;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import static smartparking.SmartParking.Login;
+import Vista.Paneles.Asignacion;
+import static Vista.Paneles.Asignacion.*;
+
 
 /**
  *
@@ -21,7 +22,9 @@ public class Controlador  {
     
     private Login login;
     private Usuario ModelUsuario;
+    private Vehiculo ModelVehiculo;
     private Menu menu;
+    private AsignarEspacios asignacion;
 
     public Controlador(Login login, Usuario ModelUsuario) {
         this.login = login;
@@ -43,6 +46,15 @@ public class Controlador  {
         }else{
             return true;
         }
+    }
+    
+    public void AsigarEspacio(){
+        ModelVehiculo.setPlaca(Placa.getText());
+        ModelVehiculo.setNombre(User.getText());
+        
+        asignacion.AsignarEspacios();
+        
+        
     }
    
 }

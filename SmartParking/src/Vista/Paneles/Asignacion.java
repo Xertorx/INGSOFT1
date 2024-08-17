@@ -38,8 +38,8 @@ public class Asignacion extends javax.swing.JFrame {
         Placa = new javax.swing.JTextField();
         jSeparator3 = new javax.swing.JSeparator();
         User = new javax.swing.JTextField();
-        LogButton = new javax.swing.JButton();
-        LogButton1 = new javax.swing.JButton();
+        CancelButton = new javax.swing.JButton();
+        AsignacionButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -99,37 +99,37 @@ public class Asignacion extends javax.swing.JFrame {
         });
         Asignacion.add(User, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 250, 300, 50));
 
-        LogButton.setBackground(new java.awt.Color(181, 223, 224));
-        LogButton.setFont(new java.awt.Font("Segoe Print", 2, 18)); // NOI18N
-        LogButton.setText("Cancelar");
-        LogButton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        LogButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        CancelButton.setBackground(new java.awt.Color(181, 223, 224));
+        CancelButton.setFont(new java.awt.Font("Segoe Print", 2, 18)); // NOI18N
+        CancelButton.setText("Cancelar");
+        CancelButton.setBorder(javax.swing.BorderFactory.createBevelBorder(null));
+        CancelButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                LogButtonMouseClicked(evt);
+                CancelButtonMouseClicked(evt);
             }
         });
-        LogButton.addActionListener(new java.awt.event.ActionListener() {
+        CancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LogButtonActionPerformed(evt);
+                CancelButtonActionPerformed(evt);
             }
         });
-        Asignacion.add(LogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 420, 180, 40));
+        Asignacion.add(CancelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 420, 180, 40));
 
-        LogButton1.setBackground(new java.awt.Color(181, 223, 224));
-        LogButton1.setFont(new java.awt.Font("Segoe Print", 2, 18)); // NOI18N
-        LogButton1.setText("Asignar");
-        LogButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        LogButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        AsignacionButton.setBackground(new java.awt.Color(181, 223, 224));
+        AsignacionButton.setFont(new java.awt.Font("Segoe Print", 2, 18)); // NOI18N
+        AsignacionButton.setText("Asignar");
+        AsignacionButton.setBorder(javax.swing.BorderFactory.createBevelBorder(null));
+        AsignacionButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                LogButton1MouseClicked(evt);
+                AsignacionButtonMouseClicked(evt);
             }
         });
-        LogButton1.addActionListener(new java.awt.event.ActionListener() {
+        AsignacionButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LogButton1ActionPerformed(evt);
+                AsignacionButtonActionPerformed(evt);
             }
         });
-        Asignacion.add(LogButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 420, 180, 40));
+        Asignacion.add(AsignacionButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 420, 180, 40));
 
         getContentPane().add(Asignacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 520));
 
@@ -160,21 +160,21 @@ public class Asignacion extends javax.swing.JFrame {
 
     }//GEN-LAST:event_UserActionPerformed
 
-    private void LogButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LogButtonMouseClicked
+    private void CancelButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CancelButtonMouseClicked
 
-    }//GEN-LAST:event_LogButtonMouseClicked
+    }//GEN-LAST:event_CancelButtonMouseClicked
 
-    private void LogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogButtonActionPerformed
+    private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_LogButtonActionPerformed
+    }//GEN-LAST:event_CancelButtonActionPerformed
 
-    private void LogButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LogButton1MouseClicked
+    private void AsignacionButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AsignacionButtonMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_LogButton1MouseClicked
+    }//GEN-LAST:event_AsignacionButtonMouseClicked
 
-    private void LogButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogButton1ActionPerformed
+    private void AsignacionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AsignacionButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_LogButton1ActionPerformed
+    }//GEN-LAST:event_AsignacionButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -216,8 +216,8 @@ public class Asignacion extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Asignacion;
-    public static javax.swing.JButton LogButton;
-    public static javax.swing.JButton LogButton1;
+    public static javax.swing.JButton AsignacionButton;
+    public static javax.swing.JButton CancelButton;
     public static javax.swing.JTextField Placa;
     public static javax.swing.JTextField User;
     private javax.swing.JLabel jLabel1;
