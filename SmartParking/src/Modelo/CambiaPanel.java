@@ -13,12 +13,14 @@ import javax.swing.JPanel;
 
 public class CambiaPanel {
     //
-    private JPanel container;
-    private JPanel content;
+    private final JPanel container;
+    private final JPanel content;
 
 
     /**
      * Constructor de clase
+     * @param container
+     * @param content
      */
     public CambiaPanel(JPanel container, JPanel content) {
         this.container = container;

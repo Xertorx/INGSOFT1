@@ -4,7 +4,7 @@
  */
 package Vista;
 
-import Controlador.Controlador;
+import Controlador.ControladorLogin;
 import Modelo.Usuario;
 import java.awt.Color;
 import java.awt.Image;
@@ -23,15 +23,15 @@ public class Login extends javax.swing.JFrame {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
-    Controlador objControlador;
-    public static final Menu menu =new Menu();
+    ControladorLogin objControlador;
+    public  final Menu menu =new Menu();
     /**
      * Creates new form Login
      */
     public Login() {
         initComponents();
         Usuario usario = new Usuario();
-        objControlador = new Controlador(this, usario);
+        objControlador = new ControladorLogin(this, usario);
         
         try{
             File Fonstyle = new File("/Recursos/Tipografia/Mansalva-Regular.tff");

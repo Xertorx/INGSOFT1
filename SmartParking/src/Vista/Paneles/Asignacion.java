@@ -4,6 +4,12 @@
  */
 package Vista.Paneles;
 
+import Controlador.ControladorAsignacion;
+import Modelo.AsignarEspacios;
+import Modelo.CambiaPanel;
+import Modelo.Vehiculo;
+import Vista.Menu;
+
 import java.awt.Color;
 import javax.swing.JPanel;
 
@@ -14,11 +20,21 @@ import javax.swing.JPanel;
 public class Asignacion extends javax.swing.JFrame {
 
     /**
-     * Creates new form Asignacion
+     * Creates new form Asignar
      */
+    
+ 
+    public final MenuPrincipal menuP =new MenuPrincipal();
+    public final Menu menu =new Menu();
+
+    
+    ControladorAsignacion objControlador;
     public Asignacion() {
         initComponents();
-          this.setLocationRelativeTo(null);
+        
+        Vehiculo vehiculo = new Vehiculo();
+        AsignarEspacios asignarEspacios = new AsignarEspacios();
+        objControlador = new ControladorAsignacion( vehiculo,asignarEspacios);
     }
 
     /**
@@ -31,36 +47,34 @@ public class Asignacion extends javax.swing.JFrame {
     private void initComponents() {
 
         Asignacion = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
-        jSeparator2 = new javax.swing.JSeparator();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jSeparator4 = new javax.swing.JSeparator();
+        jSeparator5 = new javax.swing.JSeparator();
         Placa = new javax.swing.JTextField();
-        jSeparator3 = new javax.swing.JSeparator();
+        jSeparator6 = new javax.swing.JSeparator();
         User = new javax.swing.JTextField();
         CancelButton = new javax.swing.JButton();
         AsignacionButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(255, 255, 255));
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Asignacion.setBackground(new java.awt.Color(255, 255, 255));
         Asignacion.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Imagenes/car.png"))); // NOI18N
-        Asignacion.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 0, 137, 152));
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Imagenes/car.png"))); // NOI18N
+        Asignacion.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 0, 137, 152));
 
-        jLabel1.setFont(new java.awt.Font("Segoe Print", 2, 24)); // NOI18N
-        jLabel1.setText("Asignacion de espacios para vehiculos");
-        Asignacion.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 560, 40));
+        jLabel4.setFont(new java.awt.Font("Segoe Print", 2, 24)); // NOI18N
+        jLabel4.setText("Asignacion de espacios para vehiculos");
+        Asignacion.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 560, 40));
 
-        jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
-        Asignacion.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 694, 26));
+        jSeparator4.setBackground(new java.awt.Color(0, 0, 0));
+        Asignacion.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 694, 26));
 
-        jSeparator2.setBackground(new java.awt.Color(204, 204, 204));
-        jSeparator2.setForeground(new java.awt.Color(204, 204, 204));
-        Asignacion.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 300, 300, 40));
+        jSeparator5.setBackground(new java.awt.Color(204, 204, 204));
+        jSeparator5.setForeground(new java.awt.Color(204, 204, 204));
+        Asignacion.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, 250, 20));
 
         Placa.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 24)); // NOI18N
         Placa.setForeground(new java.awt.Color(204, 204, 204));
@@ -77,11 +91,11 @@ public class Asignacion extends javax.swing.JFrame {
                 PlacaActionPerformed(evt);
             }
         });
-        Asignacion.add(Placa, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 250, 300, 50));
+        Asignacion.add(Placa, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 280, 60));
 
-        jSeparator3.setBackground(new java.awt.Color(204, 204, 204));
-        jSeparator3.setForeground(new java.awt.Color(204, 204, 204));
-        Asignacion.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 300, 300, 40));
+        jSeparator6.setBackground(new java.awt.Color(204, 204, 204));
+        jSeparator6.setForeground(new java.awt.Color(204, 204, 204));
+        Asignacion.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 280, 280, 30));
 
         User.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 24)); // NOI18N
         User.setForeground(new java.awt.Color(204, 204, 204));
@@ -97,12 +111,12 @@ public class Asignacion extends javax.swing.JFrame {
                 UserActionPerformed(evt);
             }
         });
-        Asignacion.add(User, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 250, 300, 50));
+        Asignacion.add(User, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 220, 350, 60));
 
         CancelButton.setBackground(new java.awt.Color(181, 223, 224));
         CancelButton.setFont(new java.awt.Font("Segoe Print", 2, 18)); // NOI18N
         CancelButton.setText("Cancelar");
-        CancelButton.setBorder(javax.swing.BorderFactory.createBevelBorder(null));
+        CancelButton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         CancelButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 CancelButtonMouseClicked(evt);
@@ -118,7 +132,7 @@ public class Asignacion extends javax.swing.JFrame {
         AsignacionButton.setBackground(new java.awt.Color(181, 223, 224));
         AsignacionButton.setFont(new java.awt.Font("Segoe Print", 2, 18)); // NOI18N
         AsignacionButton.setText("Asignar");
-        AsignacionButton.setBorder(javax.swing.BorderFactory.createBevelBorder(null));
+        AsignacionButton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         AsignacionButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 AsignacionButtonMouseClicked(evt);
@@ -131,7 +145,22 @@ public class Asignacion extends javax.swing.JFrame {
         });
         Asignacion.add(AsignacionButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 420, 180, 40));
 
-        getContentPane().add(Asignacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 520));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Asignacion, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Asignacion, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -141,7 +170,6 @@ public class Asignacion extends javax.swing.JFrame {
             Placa.setText("");
             Placa.setForeground(Color.BLACK);
         }
-
     }//GEN-LAST:event_PlacaMousePressed
 
     private void PlacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PlacaActionPerformed
@@ -149,14 +177,13 @@ public class Asignacion extends javax.swing.JFrame {
     }//GEN-LAST:event_PlacaActionPerformed
 
     private void UserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UserMousePressed
-          if(User.getText().equals("Nombre Usuario")){
+        if(User.getText().equals("Nombre Usuario")){
             User.setText("");
             User.setForeground(Color.BLACK);
         }
     }//GEN-LAST:event_UserMousePressed
 
     private void UserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserActionPerformed
-       
 
     }//GEN-LAST:event_UserActionPerformed
 
@@ -165,17 +192,30 @@ public class Asignacion extends javax.swing.JFrame {
     }//GEN-LAST:event_CancelButtonMouseClicked
 
     private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelButtonActionPerformed
-        // TODO add your handling code here:
+         
+        new CambiaPanel(menu.getJpanel(),menuP.getJpanel());
     }//GEN-LAST:event_CancelButtonActionPerformed
 
     private void AsignacionButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AsignacionButtonMouseClicked
-        // TODO add your handling code here:
+
+        if(objControlador.AsigarEspacio()){
+             User.setText("");
+             Placa.setText("");
+             javax.swing.JOptionPane.showMessageDialog(this, "Vehiculo Registrado Correctamente");
+             objControlador.motrar();
+              
+        }else{
+            javax.swing.JOptionPane.showMessageDialog(this, "No");
+        }
     }//GEN-LAST:event_AsignacionButtonMouseClicked
 
     private void AsignacionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AsignacionButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_AsignacionButtonActionPerformed
 
+    public JPanel getJpanel(){
+        return Asignacion;
+    }
     /**
      * @param args the command line arguments
      */
@@ -202,6 +242,7 @@ public class Asignacion extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Asignacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -210,20 +251,17 @@ public class Asignacion extends javax.swing.JFrame {
             }
         });
     }
-    public JPanel getJpanel(){
-        return Asignacion;
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel Asignacion;
+    public static javax.swing.JPanel Asignacion;
     public static javax.swing.JButton AsignacionButton;
     public static javax.swing.JButton CancelButton;
     public static javax.swing.JTextField Placa;
     public static javax.swing.JTextField User;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JSeparator jSeparator6;
     // End of variables declaration//GEN-END:variables
 }

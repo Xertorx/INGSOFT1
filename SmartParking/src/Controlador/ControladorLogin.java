@@ -18,7 +18,7 @@ import static Vista.Paneles.Asignacion.*;
  *
  * @author roy-j
  */
-public class Controlador  {
+public class ControladorLogin  {
     
     private Login login;
     private Usuario ModelUsuario;
@@ -26,7 +26,7 @@ public class Controlador  {
     private Menu menu;
     private AsignarEspacios asignacion;
 
-    public Controlador(Login login, Usuario ModelUsuario) {
+    public ControladorLogin(Login login, Usuario ModelUsuario) {
         this.login = login;
         this.ModelUsuario = ModelUsuario;
     }
@@ -51,8 +51,7 @@ public class Controlador  {
     public void AsigarEspacio(){
         ModelVehiculo.setPlaca(Placa.getText());
         ModelVehiculo.setNombre(User.getText());
-        
-        asignacion.AsignandoEspacios(ModelVehiculo.getNombre(),ModelVehiculo.getPlaca());
+        asignacion.asignarEspacio(ModelVehiculo.getPlaca(),ModelVehiculo.getNombre());
         
         
     }

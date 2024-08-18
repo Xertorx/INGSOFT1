@@ -20,31 +20,58 @@ public class SmartParking {
      */
     public static final Login Login =new Login();
     public static void main(String[] args) throws UnsupportedLookAndFeelException {
-       //FlatLightLaf.setup();
-       //UIManager.setLookAndFeel(new FlatLightLaf());
-       //UIManager.put( "TextComponent.arc", 50);
-      //SwingUtilities.updateComponentTreeUI(Login);
-
-        Login.setVisible(true);
+      /* FlatLightLaf.setup();
+       UIManager.setLookAndFeel(new FlatLightLaf());
+       UIManager.put( "TextComponent.arc", 50);
+       SwingUtilities.updateComponentTreeUI(Login);
+*/
+      
+       Login.setVisible(true);
         
-       
-        AsignarEspacios parkingLot = new AsignarEspacios();
+         AsignarEspacios asignarEspacios = new AsignarEspacios();
+         // Mostrar el estado inicial de los espacios
+   
+        // Mostrar el estado final
+        System.out.println("\nDespués de asignar otro vehículo:");
+        asignarEspacios.mostrarEstado();
+        
+      /*
+      AsignarEspacios asignador = new AsignarEspacios();
 
-         // Mostrar estado inicial
-        parkingLot.displayStatus();
+        // Asignar algunos espacios
+        asignador.asignarEspacio("ABC123", "Juan Pérez");
+        asignador.asignarEspacio("DEF456", "María López");
+        asignador.asignarEspacio("GHI789", "Carlos Rodríguez");
 
-        // Asignar espacios
-        parkingLot.AsignandoEspacios(5, "ABC123", "Juan Pérez");
-        parkingLot.AsignandoEspacios(10, "XYZ789", "Ana Gómez");
+        // Mostrar el estado de los espacios
+        System.out.println("\nEstado inicial de los espacios:");
+        asignador.mostrarEstado();
 
-        // Mostrar estado después de asignar
-        parkingLot.displayStatus();
+        // Liberar un espacio por número de espacio
+        System.out.println("\nLiberando el espacio 2:");
+        asignador.liberarEspacio(2);
 
-        // Liberar un espacio
-        parkingLot.releaseSpace(5);
+        // Mostrar el estado de los espacios después de liberar
+        System.out.println("\nEstado después de liberar el espacio 2:");
+        asignador.mostrarEstado();
 
-        // Mostrar estado después de liberar
-        parkingLot.displayStatus();
+        // Liberar un espacio por placa
+        System.out.println("\nLiberando el espacio del vehículo con placa ABC123:");
+        asignador.liberarEspacioPorPlaca("ABC123");
+
+        // Mostrar el estado de los espacios después de liberar por placa
+        System.out.println("\nEstado después de liberar el vehículo con placa ABC123:");
+        asignador.mostrarEstado();
+
+        // Intentar liberar un espacio que no existe
+        System.out.println("\nIntentando liberar un espacio con una placa que no está asignada:");
+        asignador.liberarEspacioPorPlaca("XYZ000");
+
+        // Mostrar el estado final de los espacios
+        System.out.println("\nEstado final de los espacios:");
+        asignador.mostrarEstado();
+        */
+        
     }
         
         

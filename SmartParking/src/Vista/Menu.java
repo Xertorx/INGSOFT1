@@ -10,6 +10,9 @@ import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import Modelo.CambiaPanel;
+import Vista.Paneles.Liberacion;
+import Vista.Paneles.MenuPrincipal;
+import javax.swing.JPanel;
 
 /**
  *
@@ -20,9 +23,13 @@ public class Menu extends javax.swing.JFrame {
     /**
      * Creates new form Menu
      */
+    
+    public  final MenuPrincipal menup =new MenuPrincipal();
+    public  final Liberacion liberacion =new Liberacion();
     public Menu() {
         initComponents();
         
+        new CambiaPanel(PanelPrincipal,MenuPrincipal.getJpanel());
         
         //Logo
        imagenes();
@@ -167,6 +174,11 @@ public class Menu extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe Print", 2, 24)); // NOI18N
         jLabel5.setText("Liberacion");
         jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -240,12 +252,20 @@ public class Menu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public static final Asignacion asingacion = new Asignacion();
+
     private void jLabel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MousePressed
      
-        Asignacion asingacion = new Asignacion();
-        new CambiaPanel(PanelPrincipal,asingacion.getJpanel() );
+        
+        new CambiaPanel(PanelPrincipal,asingacion.getJpanel());
     }//GEN-LAST:event_jLabel2MousePressed
 
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+         new CambiaPanel(PanelPrincipal,liberacion.getJpanel());
+    }//GEN-LAST:event_jLabel5MouseClicked
+    public   JPanel getJpanel(){
+        return PanelPrincipal;
+    }
     /**
      * @param args the command line arguments
      */
@@ -288,7 +308,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel Cono3;
     private javax.swing.JLabel IconLabel;
     private javax.swing.JLabel IconPerson;
-    private javax.swing.JPanel PanelPrincipal;
+    public static javax.swing.JPanel PanelPrincipal;
     private javax.swing.JLabel jLabel1;
     public static javax.swing.JLabel jLabel2;
     public static javax.swing.JLabel jLabel3;

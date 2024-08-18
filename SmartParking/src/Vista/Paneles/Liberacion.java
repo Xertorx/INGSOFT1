@@ -4,7 +4,14 @@
  */
 package Vista.Paneles;
 
+import Controlador.ControladorAsignacion;
+import Modelo.AsignarEspacios;
+import Modelo.Vehiculo;
+import static Vista.Paneles.Asignacion.Asignacion;
+import static Vista.Paneles.Asignacion.Placa;
+import static Vista.Paneles.Asignacion.User;
 import java.awt.Color;
+import javax.swing.JPanel;
 
 /**
  *
@@ -15,8 +22,16 @@ public class Liberacion extends javax.swing.JFrame {
     /**
      * Creates new form Administracion
      */
+    ControladorAsignacion objControlador;
+
     public Liberacion() {
         initComponents();
+        
+     
+        AsignarEspacios asignarEspacios = new AsignarEspacios();
+       
+        
+        objControlador = new ControladorAsignacion(asignarEspacios);
     }
 
     /**
@@ -28,84 +43,67 @@ public class Liberacion extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        PanelPrincipal = new javax.swing.JPanel();
+        Liberacion = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        Placa = new javax.swing.JTextField();
-        LogButton1 = new javax.swing.JButton();
-        LogButton = new javax.swing.JButton();
+        consultarPlaca = new javax.swing.JTextField();
+        Consultar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jSeparator2 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        PanelPrincipal.setBackground(new java.awt.Color(255, 255, 255));
-        PanelPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        Liberacion.setBackground(new java.awt.Color(255, 255, 255));
+        Liberacion.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Imagenes/car.png"))); // NOI18N
-        PanelPrincipal.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 0, 137, 152));
+        Liberacion.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 0, 137, 152));
 
         jLabel1.setFont(new java.awt.Font("Segoe Print", 2, 24)); // NOI18N
         jLabel1.setText("Liberacion de espacios");
-        PanelPrincipal.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 330, 40));
+        Liberacion.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 330, 40));
 
         jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
-        PanelPrincipal.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 694, 26));
+        Liberacion.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 694, 26));
 
-        Placa.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 24)); // NOI18N
-        Placa.setForeground(new java.awt.Color(204, 204, 204));
-        Placa.setText("Placa");
-        Placa.setToolTipText("");
-        Placa.setBorder(null);
-        Placa.addMouseListener(new java.awt.event.MouseAdapter() {
+        consultarPlaca.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 24)); // NOI18N
+        consultarPlaca.setForeground(new java.awt.Color(204, 204, 204));
+        consultarPlaca.setText("Placa");
+        consultarPlaca.setToolTipText("");
+        consultarPlaca.setBorder(null);
+        consultarPlaca.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                PlacaMousePressed(evt);
+                consultarPlacaMousePressed(evt);
             }
         });
-        Placa.addActionListener(new java.awt.event.ActionListener() {
+        consultarPlaca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PlacaActionPerformed(evt);
+                consultarPlacaActionPerformed(evt);
             }
         });
-        PanelPrincipal.add(Placa, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 300, 50));
+        Liberacion.add(consultarPlaca, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, 300, 50));
 
-        LogButton1.setBackground(new java.awt.Color(181, 223, 224));
-        LogButton1.setFont(new java.awt.Font("Segoe Print", 2, 18)); // NOI18N
-        LogButton1.setText("Asignar");
-        LogButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        LogButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        Consultar.setBackground(new java.awt.Color(181, 223, 224));
+        Consultar.setFont(new java.awt.Font("Segoe Print", 2, 18)); // NOI18N
+        Consultar.setText("Consultar");
+        Consultar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        Consultar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                LogButton1MouseClicked(evt);
+                ConsultarMouseClicked(evt);
             }
         });
-        LogButton1.addActionListener(new java.awt.event.ActionListener() {
+        Consultar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LogButton1ActionPerformed(evt);
+                ConsultarActionPerformed(evt);
             }
         });
-        PanelPrincipal.add(LogButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 180, 130, 40));
-
-        LogButton.setBackground(new java.awt.Color(181, 223, 224));
-        LogButton.setFont(new java.awt.Font("Segoe Print", 2, 18)); // NOI18N
-        LogButton.setText("Cancelar");
-        LogButton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        LogButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                LogButtonMouseClicked(evt);
-            }
-        });
-        LogButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LogButtonActionPerformed(evt);
-            }
-        });
-        PanelPrincipal.add(LogButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 180, 120, 40));
+        Liberacion.add(Consultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 180, 130, 40));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
-        PanelPrincipal.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, 520, 260));
-        PanelPrincipal.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 340, 50));
+        Liberacion.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, 520, 260));
+        Liberacion.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, 340, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -115,7 +113,7 @@ public class Liberacion extends javax.swing.JFrame {
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(PanelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 720, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Liberacion, javax.swing.GroupLayout.PREFERRED_SIZE, 720, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
@@ -124,40 +122,41 @@ public class Liberacion extends javax.swing.JFrame {
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(PanelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Liberacion, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void PlacaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PlacaMousePressed
-        if(Placa.getText().equals("Placa")){
-            Placa.setText("");
-            Placa.setForeground(Color.BLACK);
+    private void consultarPlacaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_consultarPlacaMousePressed
+        if(consultarPlaca.getText().equals("Placa")){
+            consultarPlaca.setText("");
+            consultarPlaca.setForeground(Color.BLACK);
         }
-    }//GEN-LAST:event_PlacaMousePressed
+    }//GEN-LAST:event_consultarPlacaMousePressed
 
-    private void PlacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PlacaActionPerformed
+    private void consultarPlacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarPlacaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_PlacaActionPerformed
+    }//GEN-LAST:event_consultarPlacaActionPerformed
 
-    private void LogButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LogButton1MouseClicked
+    private void ConsultarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ConsultarMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_LogButton1MouseClicked
+    }//GEN-LAST:event_ConsultarMouseClicked
 
-    private void LogButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_LogButton1ActionPerformed
-
-    private void LogButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LogButtonMouseClicked
-
-    }//GEN-LAST:event_LogButtonMouseClicked
-
-    private void LogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_LogButtonActionPerformed
-
+    private void ConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultarActionPerformed
+         if(!objControlador.LiberarEspacio()){
+             Placa.setText("");
+             javax.swing.JOptionPane.showMessageDialog(this, "Placa Encontrada");
+              
+        }else{
+            javax.swing.JOptionPane.showMessageDialog(this, "No");
+        }
+    }//GEN-LAST:event_ConsultarActionPerformed
+    
+    public JPanel getJpanel(){
+            return Liberacion;
+    }
     /**
      * @param args the command line arguments
      */
@@ -195,10 +194,9 @@ public class Liberacion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public static javax.swing.JButton LogButton;
-    public static javax.swing.JButton LogButton1;
-    private javax.swing.JPanel PanelPrincipal;
-    public static javax.swing.JTextField Placa;
+    public static javax.swing.JButton Consultar;
+    private javax.swing.JPanel Liberacion;
+    public static javax.swing.JTextField consultarPlaca;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
