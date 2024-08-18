@@ -5,7 +5,6 @@
 package Vista.Paneles;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;

@@ -28,12 +28,12 @@ public class SmartParking {
       
        Login.setVisible(true);
         
-         AsignarEspacios asignarEspacios = new AsignarEspacios();
-         // Mostrar el estado inicial de los espacios
+        //  AsignarEspacios asignarEspacios = new AsignarEspacios();
+        // Mostrar el estado inicial de los espacios
    
         // Mostrar el estado final
-        System.out.println("\nDespués de asignar otro vehículo:");
-        asignarEspacios.mostrarEstado();
+        //System.out.println("\nDespués de asignar otro vehículo:");
+        // asignarEspacios.mostrarEstado();
         
       /*
       AsignarEspacios asignador = new AsignarEspacios();

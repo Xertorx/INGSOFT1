@@ -5,11 +5,8 @@
 package Vista.Paneles;
 
 import Controlador.ControladorAsignacion;
-import Modelo.AsignarEspacios;
-import Modelo.Vehiculo;
-import static Vista.Paneles.Asignacion.Asignacion;
+import Vista.Menu;
 import static Vista.Paneles.Asignacion.Placa;
-import static Vista.Paneles.Asignacion.User;
 import java.awt.Color;
 import javax.swing.JPanel;
 
@@ -22,16 +19,11 @@ public class Liberacion extends javax.swing.JFrame {
     /**
      * Creates new form Administracion
      */
-    ControladorAsignacion objControlador;
+    ControladorAsignacion controlador = Menu.objControlador;
 
     public Liberacion() {
         initComponents();
-        
-     
-        AsignarEspacios asignarEspacios = new AsignarEspacios();
        
-        
-        objControlador = new ControladorAsignacion(asignarEspacios);
     }
 
     /**
@@ -145,10 +137,10 @@ public class Liberacion extends javax.swing.JFrame {
     }//GEN-LAST:event_ConsultarMouseClicked
 
     private void ConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultarActionPerformed
-         if(!objControlador.LiberarEspacio()){
+         if(!controlador.LiberarEspacio()){
              Placa.setText("");
              javax.swing.JOptionPane.showMessageDialog(this, "Placa Encontrada");
-              
+             controlador.mostrar();
         }else{
             javax.swing.JOptionPane.showMessageDialog(this, "No");
         }

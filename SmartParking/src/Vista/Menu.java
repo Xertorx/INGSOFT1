@@ -4,12 +4,16 @@
  */
 package Vista;
 
+import Controlador.ControladorAsignacion;
+import Controlador.ControladorLogin;
+import Modelo.AsignarEspacios;
 import Modelo.Usuario;
 import Vista.Paneles.Asignacion;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import Modelo.CambiaPanel;
+import Modelo.Vehiculo;
 import Vista.Paneles.Liberacion;
 import Vista.Paneles.MenuPrincipal;
 import javax.swing.JPanel;
@@ -26,16 +30,24 @@ public class Menu extends javax.swing.JFrame {
     
     public  final MenuPrincipal menup =new MenuPrincipal();
     public  final Liberacion liberacion =new Liberacion();
+     public static ControladorAsignacion objControlador;
+    
     public Menu() {
         initComponents();
+
+        // Se inicia la variable de espacios
+        AsignarEspacios asignarEspacios = new AsignarEspacios();
+        Vehiculo vehiculo = new Vehiculo();
         
-        new CambiaPanel(PanelPrincipal,MenuPrincipal.getJpanel());
-        
-        //Logo
-       imagenes();
-         this.setLocationRelativeTo(null);
+        objControlador = new ControladorAsignacion(vehiculo,asignarEspacios);
+        new CambiaPanel(PanelPrincipal, MenuPrincipal.getJpanel());
+
+        // Logo
+        imagenes();
+        this.setLocationRelativeTo(null);
     }
     public final void imagenes(){
+        
         //Logo
         ImageIcon icono= new ImageIcon(getClass().getResource("/Recursos/Imagenes/Icon2.png"));
         Icon marco = new ImageIcon(icono.getImage().getScaledInstance(IconLabel.getWidth(), IconLabel.getHeight(), Image.SCALE_DEFAULT));
@@ -51,8 +63,6 @@ public class Menu extends javax.swing.JFrame {
         Cono2.setIcon(IconoCono);
         Cono1.setIcon(IconoCono);
         Cono3.setIcon(IconoCono);
-        
-        
         this.repaint();
     }
 
@@ -256,8 +266,8 @@ public class Menu extends javax.swing.JFrame {
 
     private void jLabel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MousePressed
      
-        
         new CambiaPanel(PanelPrincipal,asingacion.getJpanel());
+        
     }//GEN-LAST:event_jLabel2MousePressed
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked

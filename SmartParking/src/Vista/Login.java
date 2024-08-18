@@ -45,8 +45,7 @@ public class Login extends javax.swing.JFrame {
         Icon marco = new ImageIcon(icono.getImage().getScaledInstance(IconLabel.getWidth(), IconLabel.getHeight(), Image.SCALE_DEFAULT));
         IconLabel.setIcon(marco);
         this.repaint();
-        
-        
+       
        Usuario.putClientProperty("TextComponent.arc", 100);
         
     }
@@ -187,8 +186,7 @@ public class Login extends javax.swing.JFrame {
     private void LogButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LogButtonMouseClicked
        if(!objControlador.loguearse()){
              javax.swing.JOptionPane.showMessageDialog(this, "Usuario o contraseña ingresados no se encuentran registrados");
-        }else{
-           
+        }else{ 
            menu.setVisible(true);
            setVisible(false);
         }

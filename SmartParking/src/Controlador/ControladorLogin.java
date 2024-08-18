@@ -10,10 +10,7 @@ import Modelo.Vehiculo;
 import Vista.Login;
 import static Vista.Login.*;
 import Vista.Menu;
-import Vista.Paneles.Asignacion;
 import static Vista.Paneles.Asignacion.*;
-
-
 /**
  *
  * @author roy-j
@@ -30,8 +27,7 @@ public class ControladorLogin  {
         this.login = login;
         this.ModelUsuario = ModelUsuario;
     }
-
-  
+    
     public void iniciar(){
        login.setLocationRelativeTo(null);
        login.setVisible(true);
@@ -47,13 +43,5 @@ public class ControladorLogin  {
             return true;
         }
     }
-    
-    public void AsigarEspacio(){
-        ModelVehiculo.setPlaca(Placa.getText());
-        ModelVehiculo.setNombre(User.getText());
-        asignacion.asignarEspacio(ModelVehiculo.getPlaca(),ModelVehiculo.getNombre());
-        
-        
-    }
-   
+ 
 }

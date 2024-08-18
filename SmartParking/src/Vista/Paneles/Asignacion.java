@@ -27,14 +27,11 @@ public class Asignacion extends javax.swing.JFrame {
     public final MenuPrincipal menuP =new MenuPrincipal();
     public final Menu menu =new Menu();
 
-    
-    ControladorAsignacion objControlador;
+    ControladorAsignacion controlador = Menu.objControlador;
+
     public Asignacion() {
         initComponents();
-        
-        Vehiculo vehiculo = new Vehiculo();
-        AsignarEspacios asignarEspacios = new AsignarEspacios();
-        objControlador = new ControladorAsignacion( vehiculo,asignarEspacios);
+
     }
 
     /**
@@ -198,11 +195,11 @@ public class Asignacion extends javax.swing.JFrame {
 
     private void AsignacionButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AsignacionButtonMouseClicked
 
-        if(objControlador.AsigarEspacio()){
+        if(controlador.AsigarEspacio()){
              User.setText("");
              Placa.setText("");
              javax.swing.JOptionPane.showMessageDialog(this, "Vehiculo Registrado Correctamente");
-             objControlador.motrar();
+             controlador.mostrar();
               
         }else{
             javax.swing.JOptionPane.showMessageDialog(this, "No");
