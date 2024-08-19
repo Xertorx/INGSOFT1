@@ -14,7 +14,6 @@ import java.awt.Image;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.swing.BorderFactory;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -82,7 +81,7 @@ public class Administracion extends javax.swing.JFrame {
     adm.add(scrollPane);
 
     adm.revalidate();  // Actualizar el diseño
-    adm.repaint();     // Redibujar el panel
+    adm.repaint();   
 }
 
     /**

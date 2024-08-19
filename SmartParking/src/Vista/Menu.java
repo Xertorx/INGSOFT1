@@ -13,6 +13,7 @@ import javax.swing.ImageIcon;
 import Modelo.CambiaPanel;
 import Modelo.Vehiculo;
 import Vista.Paneles.Administracion;
+import Vista.Paneles.Informes;
 import Vista.Paneles.Liberacion;
 import Vista.Paneles.MenuPrincipal;
 import javax.swing.JPanel;
@@ -28,11 +29,8 @@ public class Menu extends javax.swing.JFrame {
     public final AsignarEspacios asignarEspacios = new AsignarEspacios();
     public static ControladorAsignacion objControlador;
 
-   /* private Asignacion asingacion = new Asignacion();
-    private MenuPrincipal menup = new MenuPrincipal();
-    private Liberacion liberacion = new Liberacion();
-    private Administracion admin = new Administracion();
-*/
+  
+
     public Menu() {
         initComponents();
         objControlador = new ControladorAsignacion(vehiculo, asignarEspacios);
@@ -232,6 +230,11 @@ public class Menu extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Segoe Print", 2, 24)); // NOI18N
         jLabel7.setText("Informes");
         jLabel7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel7MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -292,6 +295,11 @@ public class Menu extends javax.swing.JFrame {
         Asignacion asingacion = new Asignacion();
        cambiarPanel(asingacion.getJpanel());
     }//GEN-LAST:event_jLabel2MouseClicked
+
+    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
+       Informes informe = new Informes();
+       cambiarPanel(informe.getJpanel());
+    }//GEN-LAST:event_jLabel7MouseClicked
     public JPanel getJpanel() {
         return PanelPrincipal;
     }
