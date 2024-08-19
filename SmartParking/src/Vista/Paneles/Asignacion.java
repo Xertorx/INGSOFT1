@@ -19,15 +19,7 @@ import javax.swing.JPanel;
  */
 public class Asignacion extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Asignar
-     */
-    
- 
-    public final MenuPrincipal menuP =new MenuPrincipal();
-    public final Menu menu =new Menu();
-
-    ControladorAsignacion controlador = Menu.objControlador;
+    ControladorAsignacion controlador = Menu.getObjControlador();
 
     public Asignacion() {
         initComponents();
@@ -51,7 +43,6 @@ public class Asignacion extends javax.swing.JFrame {
         Placa = new javax.swing.JTextField();
         jSeparator6 = new javax.swing.JSeparator();
         User = new javax.swing.JTextField();
-        CancelButton = new javax.swing.JButton();
         AsignacionButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -110,22 +101,6 @@ public class Asignacion extends javax.swing.JFrame {
         });
         Asignacion.add(User, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 220, 350, 60));
 
-        CancelButton.setBackground(new java.awt.Color(181, 223, 224));
-        CancelButton.setFont(new java.awt.Font("Segoe Print", 2, 18)); // NOI18N
-        CancelButton.setText("Cancelar");
-        CancelButton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        CancelButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                CancelButtonMouseClicked(evt);
-            }
-        });
-        CancelButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CancelButtonActionPerformed(evt);
-            }
-        });
-        Asignacion.add(CancelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 420, 180, 40));
-
         AsignacionButton.setBackground(new java.awt.Color(181, 223, 224));
         AsignacionButton.setFont(new java.awt.Font("Segoe Print", 2, 18)); // NOI18N
         AsignacionButton.setText("Asignar");
@@ -140,7 +115,7 @@ public class Asignacion extends javax.swing.JFrame {
                 AsignacionButtonActionPerformed(evt);
             }
         });
-        Asignacion.add(AsignacionButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 420, 180, 40));
+        Asignacion.add(AsignacionButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 420, 180, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -183,15 +158,6 @@ public class Asignacion extends javax.swing.JFrame {
     private void UserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserActionPerformed
 
     }//GEN-LAST:event_UserActionPerformed
-
-    private void CancelButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CancelButtonMouseClicked
-
-    }//GEN-LAST:event_CancelButtonMouseClicked
-
-    private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelButtonActionPerformed
-         
-        new CambiaPanel(menu.getJpanel(),menuP.getJpanel());
-    }//GEN-LAST:event_CancelButtonActionPerformed
 
     private void AsignacionButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AsignacionButtonMouseClicked
 
@@ -252,7 +218,6 @@ public class Asignacion extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JPanel Asignacion;
     public static javax.swing.JButton AsignacionButton;
-    public static javax.swing.JButton CancelButton;
     public static javax.swing.JTextField Placa;
     public static javax.swing.JTextField User;
     private javax.swing.JLabel jLabel3;

@@ -19,11 +19,11 @@ public class Liberacion extends javax.swing.JFrame {
     /**
      * Creates new form Administracion
      */
-    ControladorAsignacion controlador = Menu.objControlador;
+    
+    public ControladorAsignacion controlador = Menu.getObjControlador();
 
     public Liberacion() {
         initComponents();
-       
     }
 
     /**
@@ -137,7 +137,7 @@ public class Liberacion extends javax.swing.JFrame {
     }//GEN-LAST:event_ConsultarMouseClicked
 
     private void ConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultarActionPerformed
-         if(!controlador.LiberarEspacio()){
+         if(controlador.LiberarEspacio()){
              Placa.setText("");
              javax.swing.JOptionPane.showMessageDialog(this, "Placa Encontrada");
              controlador.mostrar();

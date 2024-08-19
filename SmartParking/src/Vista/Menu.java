@@ -5,15 +5,14 @@
 package Vista;
 
 import Controlador.ControladorAsignacion;
-import Controlador.ControladorLogin;
 import Modelo.AsignarEspacios;
-import Modelo.Usuario;
 import Vista.Paneles.Asignacion;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import Modelo.CambiaPanel;
 import Modelo.Vehiculo;
+import Vista.Paneles.Administracion;
 import Vista.Paneles.Liberacion;
 import Vista.Paneles.MenuPrincipal;
 import javax.swing.JPanel;
@@ -24,40 +23,43 @@ import javax.swing.JPanel;
  */
 public class Menu extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Menu
-     */
-    
-    public  final MenuPrincipal menup =new MenuPrincipal();
-    public  final Liberacion liberacion =new Liberacion();
-     public static ControladorAsignacion objControlador;
-    
+    //Atributos
+    public final Vehiculo vehiculo = new Vehiculo();
+    public final AsignarEspacios asignarEspacios = new AsignarEspacios();
+    public static ControladorAsignacion objControlador;
+
+   /* private Asignacion asingacion = new Asignacion();
+    private MenuPrincipal menup = new MenuPrincipal();
+    private Liberacion liberacion = new Liberacion();
+    private Administracion admin = new Administracion();
+*/
     public Menu() {
         initComponents();
+        objControlador = new ControladorAsignacion(vehiculo, asignarEspacios);
+        MenuPrincipal menup = new MenuPrincipal();
+        cambiarPanel( menup.getJpanel());
 
-        // Se inicia la variable de espacios
-        AsignarEspacios asignarEspacios = new AsignarEspacios();
-        Vehiculo vehiculo = new Vehiculo();
-        
-        objControlador = new ControladorAsignacion(vehiculo,asignarEspacios);
-        new CambiaPanel(PanelPrincipal, MenuPrincipal.getJpanel());
-
-        // Logo
+        // new CambiaPanel(PanelPrincipal, MenuPrincipal.getJpanel());
         imagenes();
         this.setLocationRelativeTo(null);
     }
-    public final void imagenes(){
-        
+    
+    public  void cambiarPanel(JPanel nuevoPanel) {
+        new CambiaPanel(PanelPrincipal, nuevoPanel);
+    }
+
+    public final void imagenes() {
+
         //Logo
-        ImageIcon icono= new ImageIcon(getClass().getResource("/Recursos/Imagenes/Icon2.png"));
+        ImageIcon icono = new ImageIcon(getClass().getResource("/Recursos/Imagenes/Icon2.png"));
         Icon marco = new ImageIcon(icono.getImage().getScaledInstance(IconLabel.getWidth(), IconLabel.getHeight(), Image.SCALE_DEFAULT));
         IconLabel.setIcon(marco);
         //Person
-        ImageIcon iconoPersona= new ImageIcon(getClass().getResource("/Recursos/Imagenes/Persona.png"));
+        ImageIcon iconoPersona = new ImageIcon(getClass().getResource("/Recursos/Imagenes/Persona.png"));
         Icon Person = new ImageIcon(iconoPersona.getImage().getScaledInstance(IconPerson.getWidth(), IconPerson.getHeight(), Image.SCALE_DEFAULT));
         IconPerson.setIcon(Person);
         //Cono
-        ImageIcon cono= new ImageIcon(getClass().getResource("/Recursos/Imagenes/cono.png"));
+        ImageIcon cono = new ImageIcon(getClass().getResource("/Recursos/Imagenes/cono.png"));
         Icon IconoCono = new ImageIcon(cono.getImage().getScaledInstance(Cono.getWidth(), Cono.getHeight(), Image.SCALE_DEFAULT));
         Cono.setIcon(IconoCono);
         Cono2.setIcon(IconoCono);
@@ -117,6 +119,9 @@ public class Menu extends javax.swing.JFrame {
         jLabel2.setText("Asignacion ");
         jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jLabel2MousePressed(evt);
             }
@@ -154,6 +159,11 @@ public class Menu extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe Print", 2, 24)); // NOI18N
         jLabel4.setText("Administracion");
         jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -262,20 +272,34 @@ public class Menu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public static final Asignacion asingacion = new Asignacion();
 
     private void jLabel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MousePressed
-     
-        new CambiaPanel(PanelPrincipal,asingacion.getJpanel());
-        
+       
+
     }//GEN-LAST:event_jLabel2MousePressed
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-         new CambiaPanel(PanelPrincipal,liberacion.getJpanel());
+        Liberacion liberacion = new Liberacion();
+        cambiarPanel( liberacion.getJpanel());
     }//GEN-LAST:event_jLabel5MouseClicked
-    public   JPanel getJpanel(){
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        Administracion admin = new Administracion();
+        cambiarPanel( admin.getJpanel());
+    }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        Asignacion asingacion = new Asignacion();
+       cambiarPanel(asingacion.getJpanel());
+    }//GEN-LAST:event_jLabel2MouseClicked
+    public JPanel getJpanel() {
         return PanelPrincipal;
     }
+
+    public static ControladorAsignacion getObjControlador() {
+        return objControlador;
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -307,6 +331,7 @@ public class Menu extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Menu().setVisible(true);
+
             }
         });
     }

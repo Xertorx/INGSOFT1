@@ -4,18 +4,86 @@
  */
 package Vista.Paneles;
 
+import Controlador.ControladorAsignacion;
+import Modelo.Vehiculo;
+import Vista.Menu;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
 /**
  *
  * @author roy-j
  */
 public class Administracion extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Administracion
-     */
+    public ControladorAsignacion controlador = Menu.objControlador;
+    private static final DateTimeFormatter HOUR_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
+
     public Administracion() {
         initComponents();
+        mostrarEspacios();
+
     }
+
+ private void mostrarEspacios() {
+    adm.removeAll();  
+    List<Vehiculo> espacios = controlador.getSpaces();
+
+    JPanel panelEspacios = new JPanel();
+    panelEspacios.setLayout(new GridLayout(0, 1, 10, 10)); // 1 columnas por fila
+    panelEspacios.setBackground(Color.white);
+
+    // Intentar cargar la imagen
+    ImageIcon imagenOriginal = new ImageIcon(getClass().getResource("/Recursos/Imagenes/car.png")); 
+   
+    // Redimensionar la imagen para ajustarse al tamaño del JLabel
+    Image imagenEscalada = imagenOriginal.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+    ImageIcon imagen = new ImageIcon(imagenEscalada);
+
+    for (int i = 0; i < 20; i++) {
+        JPanel panelEspacio = new JPanel();
+        panelEspacio.setBorder(BorderFactory.createTitledBorder("Espacio " + (i + 1)));
+        panelEspacio.setLayout(new BorderLayout());
+        panelEspacio.setBackground(Color.white); // Fondo de panel
+
+        // Crear un JLabel con la imagen a la izquierda y el texto a la derecha
+        JLabel label = new JLabel();
+        label.setIcon(imagen);  // Colocar la imagen en el JLabel
+        label.setHorizontalAlignment(JLabel.LEFT);  // Alinear la imagen a la izquierda
+        label.setVerticalAlignment(JLabel.CENTER);  // Centrar verticalmente
+
+        if (espacios.get(i).isOccupied()) {
+            label.setText(" Ocupado por " + espacios.get(i).getPlaca() + " desde " + espacios.get(i).getHora_entrada().format(HOUR_FORMATTER));
+            panelEspacio.setBackground(Color.GREEN); // Fondo verde si ocupado
+        } else {
+            label.setText(" Libre");
+        }
+
+        // Agregar el JLabel al panelEspacio
+        panelEspacio.add(label);
+        panelEspacios.add(panelEspacio);
+    }
+
+    JScrollPane scrollPane = new JScrollPane(panelEspacios);
+    scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+    scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+
+    adm.setLayout(new BorderLayout());
+    adm.add(scrollPane);
+
+    adm.revalidate();  // Actualizar el diseño
+    adm.repaint();     // Redibujar el panel
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -26,25 +94,58 @@ public class Administracion extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        PanelPrincipal = new javax.swing.JPanel();
+        Administracion = new javax.swing.JPanel();
+        Actualizar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        adm = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        PanelPrincipal.setBackground(new java.awt.Color(255, 255, 255));
-        PanelPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        Administracion.setBackground(new java.awt.Color(255, 255, 255));
+        Administracion.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        Actualizar.setBackground(new java.awt.Color(181, 223, 224));
+        Actualizar.setFont(new java.awt.Font("Segoe Print", 2, 18)); // NOI18N
+        Actualizar.setText("Actualizar");
+        Actualizar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        Actualizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ActualizarMouseClicked(evt);
+            }
+        });
+        Actualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ActualizarActionPerformed(evt);
+            }
+        });
+        Administracion.add(Actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 130, 160, 30));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Imagenes/car.png"))); // NOI18N
-        PanelPrincipal.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 0, 137, 152));
+        Administracion.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 0, 137, 152));
 
         jLabel1.setFont(new java.awt.Font("Segoe Print", 2, 24)); // NOI18N
-        jLabel1.setText("Asignacion de espacios para vehiculos");
-        PanelPrincipal.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 560, 40));
+        jLabel1.setText("Administracion de espacios para vehiculos");
+        Administracion.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 540, 40));
 
         jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
-        PanelPrincipal.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 694, 26));
+        Administracion.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 694, 26));
+
+        adm.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout admLayout = new javax.swing.GroupLayout(adm);
+        adm.setLayout(admLayout);
+        admLayout.setHorizontalGroup(
+            admLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        admLayout.setVerticalGroup(
+            admLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        Administracion.add(adm, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 680, 310));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -54,7 +155,7 @@ public class Administracion extends javax.swing.JFrame {
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(PanelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 720, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Administracion, javax.swing.GroupLayout.PREFERRED_SIZE, 720, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
@@ -63,12 +164,20 @@ public class Administracion extends javax.swing.JFrame {
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(PanelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Administracion, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void ActualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ActualizarMouseClicked
+        mostrarEspacios();
+    }//GEN-LAST:event_ActualizarMouseClicked
+
+    private void ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActualizarActionPerformed
+        mostrarEspacios();
+    }//GEN-LAST:event_ActualizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -105,8 +214,14 @@ public class Administracion extends javax.swing.JFrame {
         });
     }
 
+    public JPanel getJpanel() {
+        return Administracion;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel PanelPrincipal;
+    public static javax.swing.JButton Actualizar;
+    private javax.swing.JPanel Administracion;
+    private javax.swing.JPanel adm;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JSeparator jSeparator1;

@@ -11,6 +11,7 @@ import static Vista.Paneles.Liberacion.*;
 import Vista.Paneles.Asignacion;
 import static Vista.Paneles.Asignacion.*;
 import Vista.Paneles.Liberacion;
+import java.util.List;
 
 /**
  *
@@ -58,7 +59,10 @@ public class ControladorAsignacion {
     }
 
     public void mostrar() {
-        asignarEspacios.mostrarEstado();
+         asignarEspacios.mostrarEstado();
+    }
+    public List<Vehiculo> getSpaces() {
+        return asignarEspacios.getSpaces();
     }
 
   

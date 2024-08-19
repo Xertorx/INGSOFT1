@@ -74,7 +74,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    public static JPanel getJpanel(){
+    public  JPanel getJpanel(){
         return PanelPrincipal;
     }
         /**
