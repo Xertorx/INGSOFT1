@@ -5,9 +5,6 @@
 package Vista.Paneles;
 
 import Controlador.ControladorAsignacion;
-import Modelo.AsignarEspacios;
-import Modelo.CambiaPanel;
-import Modelo.Vehiculo;
 import Vista.Menu;
 
 import java.awt.Color;
@@ -160,16 +157,14 @@ public class Asignacion extends javax.swing.JFrame {
     }//GEN-LAST:event_UserActionPerformed
 
     private void AsignacionButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AsignacionButtonMouseClicked
-
-        if(controlador.AsigarEspacio()){
-             User.setText("");
-             Placa.setText("");
-             javax.swing.JOptionPane.showMessageDialog(this, "Vehiculo Registrado Correctamente");
-             controlador.mostrar();
+        
+        String texto= controlador.AsigarEspacio();
+        User.setText("");
+        Placa.setText("");
+        javax.swing.JOptionPane.showMessageDialog(this, texto);
+        controlador.mostrar();
               
-        }else{
-            javax.swing.JOptionPane.showMessageDialog(this, "No");
-        }
+        
     }//GEN-LAST:event_AsignacionButtonMouseClicked
 
     private void AsignacionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AsignacionButtonActionPerformed

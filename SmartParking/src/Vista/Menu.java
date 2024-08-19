@@ -25,19 +25,19 @@ import javax.swing.JPanel;
 public class Menu extends javax.swing.JFrame {
 
     //Atributos
-    public final Vehiculo vehiculo = new Vehiculo();
+    public static final Vehiculo vehiculo = new Vehiculo();
     public final AsignarEspacios asignarEspacios = new AsignarEspacios();
     public static ControladorAsignacion objControlador;
 
   
 
     public Menu() {
-        initComponents();
         objControlador = new ControladorAsignacion(vehiculo, asignarEspacios);
         MenuPrincipal menup = new MenuPrincipal();
+       // asignarEspacios.CargarDatos();
+        
+        initComponents();
         cambiarPanel( menup.getJpanel());
-
-        // new CambiaPanel(PanelPrincipal, MenuPrincipal.getJpanel());
         imagenes();
         this.setLocationRelativeTo(null);
     }
@@ -96,6 +96,7 @@ public class Menu extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -104,9 +105,9 @@ public class Menu extends javax.swing.JFrame {
         jPanel1.add(IconLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 100, 90));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 980, 10));
 
-        jLabel1.setFont(new java.awt.Font("Segoe Print", 2, 48)); // NOI18N
-        jLabel1.setText("BIENVENIDO");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 30, 400, -1));
+        jLabel1.setFont(new java.awt.Font("Segoe Print", 2, 18)); // NOI18N
+        jLabel1.setText("Administrador");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 60, 150, -1));
         jPanel1.add(IconPerson, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 30, 100, 90));
         jPanel1.add(Cono, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 60, 80));
 
@@ -261,6 +262,10 @@ public class Menu extends javax.swing.JFrame {
         jLabel8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 520, 180, 40));
 
+        jLabel9.setFont(new java.awt.Font("Segoe Print", 2, 48)); // NOI18N
+        jLabel9.setText("BIENVENIDO");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 30, 400, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -360,6 +365,7 @@ public class Menu extends javax.swing.JFrame {
     public static javax.swing.JLabel jLabel6;
     public static javax.swing.JLabel jLabel7;
     public static javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

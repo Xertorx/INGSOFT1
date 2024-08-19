@@ -12,12 +12,14 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
+import java.util.ArrayList;
+
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
 
 /**
  *
@@ -34,25 +36,28 @@ public class Administracion extends javax.swing.JFrame {
 
     }
 
- private void mostrarEspacios() {
+private void mostrarEspacios() {
     adm.removeAll();  
-    List<Vehiculo> espacios = controlador.getSpaces();
+    ArrayList<Vehiculo> espacios = controlador.getSpaces();
 
     JPanel panelEspacios = new JPanel();
-    panelEspacios.setLayout(new GridLayout(0, 1, 10, 10)); // 1 columnas por fila
+    panelEspacios.setLayout(new GridLayout(0, 1, 10, 10)); // 1 columna por fila
     panelEspacios.setBackground(Color.white);
 
-    // Intentar cargar la imagen
+    // Intentar cargar las imágenes
     ImageIcon imagenOriginal = new ImageIcon(getClass().getResource("/Recursos/Imagenes/car.png")); 
-   
-    // Redimensionar la imagen para ajustarse al tamaño del JLabel
     Image imagenEscalada = imagenOriginal.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
     ImageIcon imagen = new ImageIcon(imagenEscalada);
-
+    
+    ImageIcon imgCamapanaRoja = new ImageIcon(getClass().getResource("/Recursos/Imagenes/Campana Normal.png")); 
+    ImageIcon imgcampanaNormal = new ImageIcon(getClass().getResource("/Recursos/Imagenes/Campana Roja.png")); 
+    
+    ImageIcon imgSearch = new ImageIcon(getClass().getResource("/Recursos/Imagenes/search.png"));
+    Image imagenEscaladaimgSearch = imgSearch.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+    
     for (int i = 0; i < 20; i++) {
-        JPanel panelEspacio = new JPanel();
+        JPanel panelEspacio = new JPanel(new BorderLayout());
         panelEspacio.setBorder(BorderFactory.createTitledBorder("Espacio " + (i + 1)));
-        panelEspacio.setLayout(new BorderLayout());
         panelEspacio.setBackground(Color.white); // Fondo de panel
 
         // Crear un JLabel con la imagen a la izquierda y el texto a la derecha
@@ -60,16 +65,38 @@ public class Administracion extends javax.swing.JFrame {
         label.setIcon(imagen);  // Colocar la imagen en el JLabel
         label.setHorizontalAlignment(JLabel.LEFT);  // Alinear la imagen a la izquierda
         label.setVerticalAlignment(JLabel.CENTER);  // Centrar verticalmente
+        label.setFont(new java.awt.Font("Segoe Print", 2, 18));
 
+        // Crear un JLabel para la segunda imagen (labelICON)
+        JLabel labelICON = new JLabel();
+        JLabel search = new JLabel();
+        
         if (espacios.get(i).isOccupied()) {
-            label.setText(" Ocupado por " + espacios.get(i).getPlaca() + " desde " + espacios.get(i).getHora_entrada().format(HOUR_FORMATTER));
-            panelEspacio.setBackground(Color.GREEN); // Fondo verde si ocupado
+            label.setText("         Ocupado por " + espacios.get(i).getPlaca()+"                  ");
+            Image imgr = imgcampanaNormal.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+            ImageIcon imgCp = new ImageIcon(imgr);
+            ImageIcon imgSE = new ImageIcon(imagenEscaladaimgSearch);
+            labelICON.setIcon(imgCp);
+            search.setIcon(imgSE);  // Imagen de búsqueda para espacio ocupado
+            
         } else {
-            label.setText(" Libre");
+            label.setText("                         Libre                       ");
+            Image imgr = imgCamapanaRoja.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+            ImageIcon imgCp = new ImageIcon(imgr);
+             ImageIcon imgSE = new ImageIcon(imagenEscaladaimgSearch);
+            labelICON.setIcon(imgCp);
+            search.setIcon(imgSE);  // No mostrar imagen de búsqueda para espacio libre
         }
 
-        // Agregar el JLabel al panelEspacio
-        panelEspacio.add(label);
+        // Crear un panel para contener los JLabels
+        JPanel contenidoPanel = new JPanel(new BorderLayout());
+        contenidoPanel.setBackground(Color.white);
+        contenidoPanel.add(label, BorderLayout.WEST); 
+        contenidoPanel.add(labelICON, BorderLayout.CENTER);
+        contenidoPanel.add(search, BorderLayout.EAST);  // Añadir la tercera imagen a la derecha
+
+        // Añadir el panel contenido al panelEspacio
+        panelEspacio.add(contenidoPanel, BorderLayout.CENTER);
         panelEspacios.add(panelEspacio);
     }
 
@@ -83,6 +110,7 @@ public class Administracion extends javax.swing.JFrame {
     adm.revalidate();  // Actualizar el diseño
     adm.repaint();   
 }
+
 
     /**
      * This method is called from within the constructor to initialize the form.

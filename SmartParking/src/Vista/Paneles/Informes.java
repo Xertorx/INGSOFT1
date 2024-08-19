@@ -8,10 +8,9 @@ import Controlador.ControladorAsignacion;
 import Modelo.InformeVehiculosCSV;
 import Modelo.Vehiculo;
 import Vista.Menu;
-import static Vista.Paneles.Asignacion.Asignacion;
 import java.awt.Image;
 import java.io.IOException;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
@@ -28,7 +27,7 @@ public class Informes extends javax.swing.JFrame {
      * Creates new form Informes
      */
     
-     public ControladorAsignacion controlador = Menu.objControlador;
+    public ControladorAsignacion controlador = Menu.objControlador;
     public Informes() {
         initComponents();
         
@@ -83,15 +82,15 @@ public class Informes extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe Print", 2, 24)); // NOI18N
         jLabel1.setText("un informe completo de todos los clientes que ");
-        Informe.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 280, -1, -1));
+        Informe.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 230, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe Print", 2, 24)); // NOI18N
         jLabel3.setText("Recuerda que en este espacio podras descargar ");
-        Informe.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, -1, -1));
+        Informe.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe Print", 2, 24)); // NOI18N
         jLabel4.setText("han asignado y liberado un espacio ");
-        Informe.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 340, -1, -1));
+        Informe.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 290, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe Print", 2, 24)); // NOI18N
         jLabel2.setText("Informe de vehiculos");
@@ -126,9 +125,11 @@ public class Informes extends javax.swing.JFrame {
     }//GEN-LAST:event_GenerarInformeMouseClicked
 
     private void GenerarInformeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GenerarInformeActionPerformed
-         InformeVehiculosCSV informe = new InformeVehiculosCSV();
+      
+        //Pasar este codigo al modelo y llamarlo desde el controlador
+        InformeVehiculosCSV informe = new InformeVehiculosCSV();
          String archivoDestino = "src/Recursos/Informes/Informe.xlsx"; 
-         List<Vehiculo> espacios = controlador.getSpaces();
+         ArrayList<Vehiculo> espacios = controlador.getSpaces();
          
          System.out.println(""+espacios.get(0).getPlaca());
          try {

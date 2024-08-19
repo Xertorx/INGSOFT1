@@ -5,10 +5,14 @@
 package Vista.Paneles;
 
 import Controlador.ControladorAsignacion;
+import Modelo.CambiaPanel;
+import Modelo.Vehiculo;
 import Vista.Menu;
+import static Vista.Menu.PanelPrincipal;
 import static Vista.Paneles.Asignacion.Placa;
 import java.awt.Color;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 /**
  *
@@ -24,6 +28,17 @@ public class Liberacion extends javax.swing.JFrame {
 
     public Liberacion() {
         initComponents();
+       
+    // Crear el JScrollPane y agregar Panel_F al JScrollPane
+        JScrollPane scrollPane = new JScrollPane(Panel_F);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
+        // Agregar el JScrollPane al panel Liberacion
+        Liberacion.add(scrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, 520, 260));
+        Liberacion.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, 340, 50));
+        this.repaint();
+        
     }
 
     /**
@@ -41,7 +56,7 @@ public class Liberacion extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         consultarPlaca = new javax.swing.JTextField();
         Consultar = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        Panel_F = new javax.swing.JPanel();
         jSeparator2 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -92,9 +107,9 @@ public class Liberacion extends javax.swing.JFrame {
         });
         Liberacion.add(Consultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 180, 130, 40));
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
-        Liberacion.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, 520, 260));
+        Panel_F.setBackground(new java.awt.Color(255, 255, 255));
+        Panel_F.setLayout(new javax.swing.BoxLayout(Panel_F, javax.swing.BoxLayout.LINE_AXIS));
+        Liberacion.add(Panel_F, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, 520, 260));
         Liberacion.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, 340, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -133,17 +148,23 @@ public class Liberacion extends javax.swing.JFrame {
     }//GEN-LAST:event_consultarPlacaActionPerformed
 
     private void ConsultarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ConsultarMouseClicked
-        // TODO add your handling code here:
+         
+        String placa = consultarPlaca.getText();
+        Vehiculo vh = controlador.BuscarPlaca(placa);
+        if( vh != null ){
+             Factura factura = new Factura();
+             factura.datos(vh);
+            new CambiaPanel(Panel_F, factura.getJpanel());
+        }else{
+            javax.swing.JOptionPane.showMessageDialog(this, "La placa no se encuentra asignada a ningun espacio");
+            consultarPlaca.setText("");
+        }
     }//GEN-LAST:event_ConsultarMouseClicked
 
     private void ConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultarActionPerformed
-         if(controlador.LiberarEspacio()){
-             Placa.setText("");
-             javax.swing.JOptionPane.showMessageDialog(this, "Placa Encontrada");
-             controlador.mostrar();
-        }else{
-            javax.swing.JOptionPane.showMessageDialog(this, "No");
-        }
+       
+        
+   
     }//GEN-LAST:event_ConsultarActionPerformed
     
     public JPanel getJpanel(){
@@ -188,10 +209,10 @@ public class Liberacion extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JButton Consultar;
     private javax.swing.JPanel Liberacion;
+    private javax.swing.JPanel Panel_F;
     public static javax.swing.JTextField consultarPlaca;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     // End of variables declaration//GEN-END:variables

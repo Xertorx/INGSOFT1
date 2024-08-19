@@ -4,18 +4,25 @@
  */
 package Modelo;
 
+import java.io.Serializable;
+import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  *
  * @author roy-j
  */
-public class Vehiculo {
-    
+public class Vehiculo implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     public String placa;
     public String nombre;
-    public LocalDateTime  Hora_entrada;
+    public LocalDateTime Hora_entrada;
+    public String Numero_factura;
     public String total;
+    public String tiempo_transcurrido;
 
     public String getPlaca() {
         return placa;
@@ -41,12 +48,28 @@ public class Vehiculo {
         this.Hora_entrada = Hora_entrada;
     }
 
+    public String getNumero_factura() {
+        return Numero_factura;
+    }
+
+    public void setNumero_factura(String Numero_factura) {
+        this.Numero_factura = Numero_factura;
+    }
+
     public String getTotal() {
         return total;
     }
 
     public void setTotal(String total) {
         this.total = total;
+    }
+
+    public String getTiempo_transcurrido() {
+        return tiempo_transcurrido;
+    }
+
+    public void setTiempo_transcurrido(String tiempo_transcurrido) {
+        this.tiempo_transcurrido = tiempo_transcurrido;
     }
 
     public boolean isOccupied() {
@@ -67,10 +90,7 @@ public class Vehiculo {
 
     @Override
     public String toString() {
-        if (isOccupied()) {
-            return "Ocupado por " + placa + " (Placa: " + placa + ") desde " + Hora_entrada;
-        } else {
-            return "Libre";
-        }
-    }                
+        return "Vehiculo{placa='" + placa + "', nombre='" + nombre + "', Hora_entrada=" + Hora_entrada + ", Numero_factura=" + Numero_factura + ", Numero_factura=" + total + ", Numero_factura=" + tiempo_transcurrido + "}";
+    }
+
 }

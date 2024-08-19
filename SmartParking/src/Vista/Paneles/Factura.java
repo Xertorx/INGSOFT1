@@ -4,10 +4,22 @@
  */
 package Vista.Paneles;
 
+import Controlador.ControladorAsignacion;
+import Modelo.CambiaPanel;
+import Modelo.Vehiculo;
+import Vista.Menu;
+import static Vista.Menu.PanelPrincipal;
+import java.awt.AlphaComposite;
 import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.Image;
-import javax.swing.Icon;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.time.format.DateTimeFormatter;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+
 
 /**
  *
@@ -18,17 +30,42 @@ public class Factura extends javax.swing.JFrame {
     /**
      * Creates new form Administracion
      */
+    public ControladorAsignacion controlador = Menu.getObjControlador();
+
     public Factura() {
         initComponents();
-         this.setLocationRelativeTo(null);
-         this.setLocationRelativeTo(null);
-        ImageIcon icono= new ImageIcon(getClass().getResource("/Recursos/Imagenes/Icon2.png"));
-        Icon marco = new ImageIcon(icono.getImage().getScaledInstance(IconLabel.getWidth(), IconLabel.getHeight(), Image.SCALE_DEFAULT));
-        IconLabel.setIcon(marco);
-        IconLabel.setBackground(new Color (0,0,0,0));
-   
+        this.setLocationRelativeTo(null);
+
+        // Cargar y procesar la imagen
+        try {
+            BufferedImage originalImage = ImageIO.read(getClass().getResource("/Recursos/Imagenes/Icon2.png"));
+
+            // Aplicar transparencia a la imagen
+            BufferedImage transparentImage = applyTransparency(originalImage, 0.1f);
+
+            // Crear un ImageIcon con la imagen procesada
+            ImageIcon icono = new ImageIcon(transparentImage.getScaledInstance(IconLabel.getWidth(), IconLabel.getHeight(), Image.SCALE_DEFAULT));
+            IconLabel.setIcon(icono);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        IconLabel.setBackground(new Color(0, 0, 0, 0));
         this.repaint();
-        
+    }
+
+    private BufferedImage applyTransparency(BufferedImage image, float alpha) {
+        // Crear una imagen con el mismo tamaño y tipo que la imagen original pero con soporte para transparencia
+        BufferedImage transparentImage = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
+
+        Graphics2D g2d = transparentImage.createGraphics();
+        // Establecer la transparencia
+        g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
+        // Dibujar la imagen original en la nueva imagen con la transparencia aplicada
+        g2d.drawImage(image, 0, 0, null);
+        g2d.dispose();
+
+        return transparentImage;
     }
 
     /**
@@ -40,7 +77,7 @@ public class Factura extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        factura = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -51,83 +88,127 @@ public class Factura extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
+        Cliente = new javax.swing.JLabel();
+        Placa = new javax.swing.JLabel();
+        Hora = new javax.swing.JLabel();
+        tiempoTranscurrido = new javax.swing.JLabel();
+        PrecioTotal = new javax.swing.JLabel();
+        PrecioTarifa = new javax.swing.JLabel();
         IconLabel = new javax.swing.JLabel();
+        Liberar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, 420, 20));
+        factura.setBackground(new java.awt.Color(255, 255, 255));
+        factura.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        factura.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, 420, 20));
 
         jLabel2.setFont(new java.awt.Font("Segoe Print", 2, 24)); // NOI18N
         jLabel2.setText("Smart Parking");
         jLabel2.setToolTipText("");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, 200, 40));
+        factura.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, 200, 40));
 
         jLabel3.setFont(new java.awt.Font("Segoe Print", 2, 14)); // NOI18N
         jLabel3.setText("Cliente :");
         jLabel3.setToolTipText("");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 110, 40));
+        factura.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 110, 40));
 
         jLabel4.setFont(new java.awt.Font("Segoe Print", 2, 14)); // NOI18N
         jLabel4.setText("Precio Total :");
         jLabel4.setToolTipText("");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 370, 150, 40));
+        factura.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 370, 150, 40));
 
         jLabel5.setFont(new java.awt.Font("Segoe Print", 2, 14)); // NOI18N
         jLabel5.setText("Placa Vehiculo :");
         jLabel5.setToolTipText("");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, 130, 40));
+        factura.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 130, 40));
 
         jLabel6.setFont(new java.awt.Font("Segoe Print", 2, 14)); // NOI18N
         jLabel6.setText("Hora Entrada :");
         jLabel6.setToolTipText("");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 200, 40));
+        factura.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 210, 200, 40));
 
         jLabel7.setFont(new java.awt.Font("Segoe Print", 2, 14)); // NOI18N
         jLabel7.setText("Tiempo Transcurrido :");
         jLabel7.setToolTipText("");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 280, 200, 40));
+        factura.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 280, 200, 40));
 
         jLabel8.setFont(new java.awt.Font("Segoe Print", 2, 14)); // NOI18N
         jLabel8.setText("Precio Tarifa :");
         jLabel8.setToolTipText("");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 320, 200, 40));
+        factura.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 320, 200, 40));
 
         jLabel1.setText("#");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 90, 150, 30));
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 380, 220, 20));
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 140, 220, 20));
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 140, 220, 20));
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, 220, 20));
-        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 250, 200, 20));
-        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 290, 220, 20));
-        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 330, 220, 20));
+        factura.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 90, 150, 30));
+        factura.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 380, 220, 20));
+        factura.add(Cliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 140, 220, 20));
+        factura.add(Placa, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 180, 220, 20));
+        factura.add(Hora, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 220, 200, 20));
+        factura.add(tiempoTranscurrido, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 290, 220, 20));
+        factura.add(PrecioTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 380, 220, 20));
+        factura.add(PrecioTarifa, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 330, 220, 20));
 
         IconLabel.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.add(IconLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, 280, 280));
+        factura.add(IconLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, 280, 280));
+
+        Liberar.setBackground(new java.awt.Color(181, 223, 224));
+        Liberar.setFont(new java.awt.Font("Segoe Print", 2, 18)); // NOI18N
+        Liberar.setText("Liberar");
+        Liberar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        Liberar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LiberarMouseClicked(evt);
+            }
+        });
+        Liberar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LiberarActionPerformed(evt);
+            }
+        });
+        factura.add(Liberar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 430, 160, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(factura, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 536, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(factura, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void LiberarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LiberarMouseClicked
+       controlador.LiberarEspacio();
+         Liberacion liberacion = new Liberacion();
+        new CambiaPanel(Menu.PanelPrincipal, liberacion.getJpanel());  
+    }//GEN-LAST:event_LiberarMouseClicked
+
+    private void LiberarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LiberarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_LiberarActionPerformed
+    public JPanel getJpanel() {
+        return factura;
+    }
+
+    public void datos(Vehiculo vehiculo) {
+        Placa.setText(vehiculo.getPlaca());
+        PrecioTarifa.setText("100 * Min");
+        Cliente.setText(vehiculo.getNombre());
+        Placa.setText(vehiculo.getPlaca());
+        //Traer solo la hora 
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        String fechaHoraComoString = vehiculo.getHora_entrada().format(formatter);
+        Hora.setText(fechaHoraComoString);
+        tiempoTranscurrido.setText(vehiculo.getTiempo_transcurrido());
+        PrecioTotal.setText("$ " + vehiculo.getTotal());
+    }
+    public void Vehiculo(Vehiculo vehiculo){
+        
+    }
 
     /**
      * @param args the command line arguments
@@ -168,14 +249,15 @@ public class Factura extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Cliente;
+    private javax.swing.JLabel Hora;
     private javax.swing.JLabel IconLabel;
+    public static javax.swing.JButton Liberar;
+    private javax.swing.JLabel Placa;
+    private javax.swing.JLabel PrecioTarifa;
+    private javax.swing.JLabel PrecioTotal;
+    private javax.swing.JPanel factura;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -184,7 +266,7 @@ public class Factura extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel tiempoTranscurrido;
     // End of variables declaration//GEN-END:variables
 }
