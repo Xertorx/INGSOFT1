@@ -20,7 +20,6 @@ public class Vehiculo implements Serializable {
     public String placa;
     public String nombre;
     public LocalDateTime Hora_entrada;
-    public String Numero_factura;
     public String total;
     public String tiempo_transcurrido;
 
@@ -46,14 +45,6 @@ public class Vehiculo implements Serializable {
 
     public void setHora_entrada(LocalDateTime Hora_entrada) {
         this.Hora_entrada = Hora_entrada;
-    }
-
-    public String getNumero_factura() {
-        return Numero_factura;
-    }
-
-    public void setNumero_factura(String Numero_factura) {
-        this.Numero_factura = Numero_factura;
     }
 
     public String getTotal() {
@@ -90,7 +81,7 @@ public class Vehiculo implements Serializable {
 
     @Override
     public String toString() {
-        return "Vehiculo{placa='" + placa + "', nombre='" + nombre + "', Hora_entrada=" + Hora_entrada + ", Numero_factura=" + Numero_factura + ", Numero_factura=" + total + ", Numero_factura=" + tiempo_transcurrido + "}";
+        return "Vehiculo{placa='" + placa + "', nombre='" + nombre + "', Hora_entrada=" + Hora_entrada +  ", Total=" + total + ", Numero_factura=" + tiempo_transcurrido + "}";
     }
 
 }
