@@ -46,20 +46,21 @@ public class ControladorAsignacion {
         System.out.println("" + User.getText());
         Vehiculo vh = asignarEspacios.buscarPorPlaca(placa);
 
-        if (placa.isEmpty() || nombre.isEmpty() ) {
+        if (placa.isEmpty() || nombre.isEmpty()) {
             return "Los campos se encuentran vacios";
-        }else{if (vh==null) {
-            // Asigna el espacio directamente usando el modelo del vehículo
-            System.out.println("Asignando vehículo con placa: " + placa);
-            asignarEspacios.asignarEspacio(placa, nombre);
-            actualizarData();
-            return "Vehiculo registrado con existo";
-        } else if (vh.getPlaca().equalsIgnoreCase(placa)) {
-            return "La placa del vehiculo ya se encuentra registrada";
-        }else{
-            return "Error Desconocido";
+        } else {
+            if (vh == null) {
+                // Asigna el espacio directamente usando el modelo del vehículo
+                System.out.println("Asignando vehículo con placa: " + placa);
+                asignarEspacios.asignarEspacio(placa, nombre);
+                actualizarData();
+                return "Vehiculo registrado con existo";
+            } else if (vh.getPlaca().equalsIgnoreCase(placa)) {
+                return "La placa del vehiculo ya se encuentra registrada";
+            } else {
+                return "Error Desconocido";
+            }
         }
-    }
     }
 
     public boolean LiberarEspacio() {
@@ -88,30 +89,35 @@ public class ControladorAsignacion {
     public Vehiculo calcularFactura(Vehiculo vh) {
         Vehiculo veh = vh;
         //Traer solo la hora 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-        String fechaHoraComoString = veh.getHora_entrada().format(formatter);
-        // Convertir el String a LocalTime
-        LocalTime horaEntrada = LocalTime.parse(fechaHoraComoString, formatter);
-        LocalTime horaActual = LocalTime.now();
+        if (vh == null) {
+            return null;
+        } else {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+            String fechaHoraComoString = veh.getHora_entrada().format(formatter);
+            // Convertir el String a LocalTime
+            LocalTime horaEntrada = LocalTime.parse(fechaHoraComoString, formatter);
+            LocalTime horaActual = LocalTime.now();
 
-        //Duracion entre la hora de entrada y la hora actual
-        Duration duracion = Duration.between(horaEntrada, horaActual);
-        // Convertir la duración a horas, minutos y segundos
-        long horas = duracion.toHours();
-        long minutos = duracion.toMinutes() % 60;
-        long segundos = duracion.getSeconds() % 60;
-        String diferenciaExactaStr = String.format("%02d:%02d:%02d", horas, minutos, segundos);
+            //Duracion entre la hora de entrada y la hora actual
+            Duration duracion = Duration.between(horaEntrada, horaActual);
+            // Convertir la duración a horas, minutos y segundos
+            long horas = duracion.toHours();
+            long minutos = duracion.toMinutes() % 60;
+            long segundos = duracion.getSeconds() % 60;
+            String diferenciaExactaStr = String.format("%02d:%02d:%02d", horas, minutos, segundos);
 
-        //SEGUNDOS 
-        double minutosDiferencia = duracion.toSeconds() / 60.0;
-        //REDONDEO DE MINUTOS
-        int minutosRedondeados = (int) Math.ceil(minutosDiferencia);
-        long precioRedondeado = (long) Math.ceil(minutosRedondeados * 100);
+            //SEGUNDOS 
+            double minutosDiferencia = duracion.toSeconds() / 60.0;
+            //REDONDEO DE MINUTOS
+            int minutosRedondeados = (int) Math.ceil(minutosDiferencia);
+            long precioRedondeado = (long) Math.ceil(minutosRedondeados * 100);
 
-        String total = String.valueOf(precioRedondeado);
-        veh.setTiempo_transcurrido(diferenciaExactaStr + "   " + minutosRedondeados + "  Minutos");
-        veh.setTotal(total);
-        return veh;
+            String total = String.valueOf(precioRedondeado);
+            veh.setTiempo_transcurrido(diferenciaExactaStr + "   " + minutosRedondeados + "  Minutos");
+            veh.setTotal(total);
+            return veh;
+        }
+
     }
 
     public void mostrar() {
