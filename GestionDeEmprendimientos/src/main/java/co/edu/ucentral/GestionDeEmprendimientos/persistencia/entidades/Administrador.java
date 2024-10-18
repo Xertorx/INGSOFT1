@@ -1,5 +1,7 @@
 package co.edu.ucentral.GestionDeEmprendimientos.persistencia.entidades;
 
+import java.util.Date;
+
 public class Administrador extends Usuario {
     // Atributo específico de Administrador
     private String topDocumento;
