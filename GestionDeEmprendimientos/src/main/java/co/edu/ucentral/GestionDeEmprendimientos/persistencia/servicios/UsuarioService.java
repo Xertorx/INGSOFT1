@@ -13,12 +13,13 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    public boolean authenticate(String correo, String contrasena) {
+    public Optional<Usuario> authenticate(String correo, String contrasena) {
         Optional<Usuario> usuarioOpt = usuarioRepository.findByCorreo(correo);
 
+        // Verifica si el usuario existe y la contraseña es correcta
         if (usuarioOpt.isPresent() && usuarioOpt.get().getContrasena().equals(contrasena)) {
-            return true;
+            return usuarioOpt;
         }
-        return false;
+        return Optional.empty();
     }
 }

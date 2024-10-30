@@ -20,31 +20,38 @@ import java.util.Optional;
 public class LoginController {
 
     @Autowired
-    private UsuarioService usuarioService; // Supongamos que tienes un servicio para manejar la lógica de usuarios
+    private UsuarioService usuarioService;
 
     @GetMapping("/login")
     public String loginPage(Model model) {
-        return "login"; // La vista que contiene el formulario de login
+        return "login"; // Vista con el formulario de login
     }
 
     @PostMapping("/login")
     public String login(@RequestParam("correo") String correo,
                         @RequestParam("contrasena") String contrasena,
                         Model model) {
-        boolean isAuthenticated = usuarioService.authenticate(correo, contrasena);
+        Optional<Usuario> optionalUsuario = usuarioService.authenticate(correo, contrasena);
 
-        if (!isAuthenticated) {
+        if (optionalUsuario.isEmpty()) {
             model.addAttribute("error", "Correo o contraseña incorrectos.");
-            return "login"; // Regresar a la página de login
-        }else{
-            // Lógica para iniciar sesión y redirigir a la página deseada
-            return "redirect:/"; // O la ruta que desees
+            return "login";
         }
+        Usuario usuario = optionalUsuario.get();
 
+        Integer rolCodigo = usuario.getCodigo_rol().getCodigo_rol();
 
+        // Redirige según el rol del usuario
+        if (rolCodigo == 1) {
+            return "redirect:/paginaRol1"; // Redirige a la página para rol 1
+        } else if (rolCodigo == 2) {
+            return "redirect:/paginaRol2"; // Redirige a la página para rol 2
+        } else {
+            model.addAttribute("error", "Rol no reconocido.");
+            return "login";
+        }
     }
-}
-    /*
+} /*
     @PostMapping({"/login"})
     public String login(
             @RequestParam("numeroDocumento") Integer numeroDocumento,
