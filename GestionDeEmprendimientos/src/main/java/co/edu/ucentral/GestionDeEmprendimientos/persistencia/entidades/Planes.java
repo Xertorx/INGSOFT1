@@ -1,59 +1,30 @@
 package co.edu.ucentral.GestionDeEmprendimientos.persistencia.entidades;
 
+import jakarta.persistence.*;
+import lombok.*;
+
+@Entity
+@Table(name = "planes")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Planes {
 
-    private int idPlan;
+    @Id
+    @Column(name = "id_plan")
+    private Integer idPlan;
+
+    @Column(name = "nombre_plan")
     private String nombrePlan;
+
+    @Column(name = "tipo_plan")
+    private Integer tipoPlan;
+
+    @Column(name = "descripcion")
     private String descripcion;
-    private float precio;
 
-    public Planes(int idPlan, String nombrePlan, String descripcion, float precio) {
-        this.idPlan = idPlan;
-        this.nombrePlan = nombrePlan;
-        this.descripcion = descripcion;
-        this.precio = precio;
-    }
-
-    public int getIdPlan() {
-        return idPlan;
-    }
-
-    public void setIdPlan(int idPlan) {
-        this.idPlan = idPlan;
-    }
-
-    public String getNombrePlan() {
-        return nombrePlan;
-    }
-
-    public void setNombrePlan(String nombrePlan) {
-        this.nombrePlan = nombrePlan;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public float getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(float precio) {
-        this.precio = precio;
-    }
-
-    // Método para mostrar detalles del plan
-    @Override
-    public String toString() {
-        return "Planes{" +
-                "idPlan=" + idPlan +
-                ", nombrePlan='" + nombrePlan + '\'' +
-                ", descripcion='" + descripcion + '\'' +
-                ", precio=" + precio +
-                '}';
-    }
+    @Column(name = "precio")
+    private Float precio;
 }
+
