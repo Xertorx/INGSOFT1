@@ -2,111 +2,50 @@ package co.edu.ucentral.GestionDeEmprendimientos.persistencia.entidades;
 
 import java.util.Date;
 
+import jakarta.persistence.*;
+import lombok.*;
+
+@Entity
+@Table(name = "usuario")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Usuario {
-    // Atributos
-    private int numeroDocumento;
+
+    @Id
+    @Column(name = "numero_documento")
+    private Integer numeroDocumento;
+
+    @Column(name = "nombres")
     private String nombres;
+
+    @Column(name = "apellidos")
     private String apellidos;
+
+    @Column(name = "tipo_documento")
     private String tipoDocumento;
+
+    @Column(name = "correo")
+    private String correo;
+
+
+    @Column(name = "numero_telefono")
     private String numeroTelefono;
+
+    @Column(name = "fecha_nacimiento")
+    @Temporal(TemporalType.DATE)
     private Date fechaNacimiento;
+
+    @Column(name = "estado")
     private String estado;
+
+    @Column(name = "contrasena")
     private String contrasena;
 
-    // Constructor
-    public Usuario(int numeroDocumento, String nombres, String apellidos, String tipoDocumento,
-                   String numeroTelefono, Date fechaNacimiento, String estado, String contrasena) {
-        this.numeroDocumento = numeroDocumento;
-        this.nombres = nombres;
-        this.apellidos = apellidos;
-        this.tipoDocumento = tipoDocumento;
-        this.numeroTelefono = numeroTelefono;
-        this.fechaNacimiento = fechaNacimiento;
-        this.estado = estado;
-        this.contrasena = contrasena;
-    }
+    @ManyToOne
+    @JoinColumn(name = "rol",referencedColumnName = "codigo_rol")
+    private Rol codigo_rol;
 
-    // Getters y Setters
-    public int getNumeroDocumento() {
-        return numeroDocumento;
-    }
-
-    public void setNumeroDocumento(int numeroDocumento) {
-        this.numeroDocumento = numeroDocumento;
-    }
-
-    public String getNombres() {
-        return nombres;
-    }
-
-    public void setNombres(String nombres) {
-        this.nombres = nombres;
-    }
-
-    public String getApellidos() {
-        return apellidos;
-    }
-
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
-    }
-
-    public String getTipoDocumento() {
-        return tipoDocumento;
-    }
-
-    public void setTipoDocumento(String tipoDocumento) {
-        this.tipoDocumento = tipoDocumento;
-    }
-
-    public String getNumeroTelefono() {
-        return numeroTelefono;
-    }
-
-    public void setNumeroTelefono(String numeroTelefono) {
-        this.numeroTelefono = numeroTelefono;
-    }
-
-    public Date getFechaNacimiento() {
-        return fechaNacimiento;
-    }
-
-    public void setFechaNacimiento(Date fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    public String getContrasena() {
-        return contrasena;
-    }
-
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
-    }
-
-    // Método para mostrar detalles del usuario
-    @Override
-    public String toString() {
-        return "Usuario{" +
-                "numeroDocumento=" + numeroDocumento +
-                ", nombres='" + nombres + '\'' +
-                ", apellidos='" + apellidos + '\'' +
-                ", tipoDocumento='" + tipoDocumento + '\'' +
-                ", numeroTelefono='" + numeroTelefono + '\'' +
-                ", fechaNacimiento=" + fechaNacimiento +
-                ", estado='" + estado + '\'' +
-                '}';
-    }
-
-    // Método para validar el estado
-    public boolean esActivo() {
-        return "Activo".equalsIgnoreCase(this.estado);
-    }
 }
+
