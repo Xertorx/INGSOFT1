@@ -2,7 +2,7 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/x-icon" href="/static/assets/logo-vt.svg" />
+    <link rel="icon" type="image/x-icon" href="/assets/logo-vt.svg" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bootstrap Register Page</title>
@@ -25,7 +25,7 @@
 </style>
 
 <nav th:replace="~{layout :: page_navbar}"></nav>
-<div class="d-flex justify-content-center align-items-center vh-100">
+<div class="container vh-100 d-flex justify-content-center align-items-center">
     <div class="bg-white p-5 rounded-5 text-secondary shadow" style="width: 35rem">
         <div class="d-flex justify-content-center">
             <img th:src="@{/assets/login-icon.svg}" alt="register-icon" style="height: 7rem"/>
@@ -33,20 +33,20 @@
         </div>
         <div class="text-center fs-1 fw-bold">Register</div>
 
-        <form>
+        <form th:action="@{/registro}"method="post" th:object="${usuario}" >
             <div class="row mt-4">
                 <div class="col-md-6">
                     <div class="input-group mb-3">
-                        <input class="form-control bg-light" type="text" placeholder="Nombres" required />
+                        <input class="form-control bg-light" type="text" placeholder="Nombres" th:field="*{nombres}" required />
                     </div>
                     <div class="input-group mb-3">
-                        <input class="form-control bg-light" type="text" placeholder="Apellidos" required />
+                        <input class="form-control bg-light" type="text" placeholder="Apellidos" th:field="*{apellidos}" required />
                     </div>
                     <div class="input-group mb-3">
-                        <input class="form-control bg-light" type="email" placeholder="Correo Electrónico" required />
+                        <input class="form-control bg-light" type="email" placeholder="Correo Electrónico" th:field="*{correo}" required />
                     </div>
                     <div class="input-group mb-3">
-                        <select class="form-select bg-light" required>
+                        <select class="form-select bg-light" th:field="*{tipoDocumento}" required>
                             <option value="" disabled selected>Tipo de Documento</option>
                             <option value="CC">Cédula de Ciudadanía</option>
                             <option value="TI">Tarjeta de Identidad</option>
@@ -56,28 +56,32 @@
                 </div>
                 <div class="col-md-6">
                     <div class="input-group mb-3">
-                        <input class="form-control bg-light" type="text" placeholder="Número de Documento" required />
+                        <input class="form-control bg-light" type="text" placeholder="Número de Documento" th:field="*{numeroDocumento}" required />
                     </div>
                     <div class="input-group mb-3">
-                        <input class="form-control bg-light" type="tel" placeholder="Número de Teléfono" required />
+                        <input class="form-control bg-light" type="tel" placeholder="Número de Teléfono" th:field="*{numeroTelefono}" required />
                     </div>
                     <div class="input-group mb-3">
-                        <input class="form-control bg-light" type="password" placeholder="Contraseña" required />
+                        <input class="form-control bg-light" type="password" placeholder="Contraseña" th:field="*{contrasena}" required />
                     </div>
                     <div class="input-group mb-3">
-                        <input class="form-control bg-light" type="date" placeholder="Fecha de Nacimiento" required />
+                        <input class="form-control bg-light" type="date" placeholder="Fecha de Nacimiento" th:field="*{fechaNacimiento}" required />
                     </div>
                 </div>
             </div>
 
-            <div class="btn text-white w-100 mt-4 fw-semibold shadow-sm">Register</div>
+            <button class="btn text-white w-100 mt-4 fw-semibold shadow-sm" type="submit">Register</button>
         </form>
 
         <div class="d-flex gap-1 justify-content-center mt-1">
             <div>Already have an account?</div>
             <a href="#" class="text-decoration-none text-info fw-semibold">Login</a>
         </div>
+        <div class="modal-body">
+            <span th:text="${error}">Error al registrar el Usuario.</span>
+        </div>
     </div>
+
 </div>
 <footer th:replace="~{layout :: page_footer}"></footer>
 </body>

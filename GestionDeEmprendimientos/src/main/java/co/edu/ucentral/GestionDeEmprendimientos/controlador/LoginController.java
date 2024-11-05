@@ -4,13 +4,16 @@ package co.edu.ucentral.GestionDeEmprendimientos.controlador;
 
 import co.edu.ucentral.GestionDeEmprendimientos.persistencia.entidades.Usuario;
 import co.edu.ucentral.GestionDeEmprendimientos.persistencia.servicios.UsuarioService;
+import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.support.SessionStatus;
 
 import java.util.Optional;
 
@@ -30,7 +33,7 @@ public class LoginController {
     @PostMapping("/login")
     public String login(@RequestParam("correo") String correo,
                         @RequestParam("contrasena") String contrasena,
-                        Model model) {
+                        Model model, HttpSession session) {
         Optional<Usuario> optionalUsuario = usuarioService.authenticate(correo, contrasena);
 
         if (optionalUsuario.isEmpty()) {
@@ -41,35 +44,20 @@ public class LoginController {
 
         Integer rolCodigo = usuario.getCodigo_rol().getCodigo_rol();
 
-        // Redirige según el rol del usuario
+        session.setAttribute("usuario", usuario);
         if (rolCodigo == 1) {
-            return "redirect:/paginaRol1"; // Redirige a la página para rol 1
+            return "redirect:/"; // Redirige a la página para rol 1
         } else if (rolCodigo == 2) {
-            return "redirect:/paginaRol2"; // Redirige a la página para rol 2
+            return "redirect:/"; // Redirige a la página para rol 2
         } else {
             model.addAttribute("error", "Rol no reconocido.");
             return "login";
         }
     }
-} /*
-    @PostMapping({"/login"})
-    public String login(
-            @RequestParam("numeroDocumento") Integer numeroDocumento,
-            @RequestParam("contrasena") String contrasena,
-            Model model) {
-
-        Optional<Usuario> usuario = usuarioService.authenticate(numeroDocumento, contrasena);
-
-        if (usuario.isPresent()) {
-            model.addAttribute("usuario", usuario.get());
-            return "redirect:/welcome"; // Redirige a la página de bienvenida o dashboard
-        } else {
-            model.addAttribute("error", "Credenciales incorrectas. Inténtalo de nuevo.");
-            return "login"; // Regresa al formulario de login con el mensaje de error
-        }
+    @RequestMapping("/logout")
+    public String logout(HttpSession session, SessionStatus status) {
+        session.invalidate();
+        status.setComplete();
+        return "redirect:/";
     }
-
-    @GetMapping("/welcome")
-    public String showWelcomePage(Model model) {
-        return "welcome"; // Esta es la página de bienvenida o menú principal después del login exitoso
-    }*/
+}

@@ -55,12 +55,22 @@
             </form>
 
             <!-- Login y Registro alineados a la derecha -->
-            <ul class="navbar-nav ms-auto mb-5 mb-lg-0">
+        <ul class="navbar-nav ms-auto mb-5 mb-lg-0" th:if="${session.usuario == null}">
                 <li class="nav-item mx-5 ">
                     <a class="nav-link active" aria-current="page" th:href="@{/login}">Loguearse</a>
                 </li>
                 <li class="nav-item mx-2">
-                    <a class="nav-link" th:href="@{/register}">Registrarse</a>
+                    <a class="nav-link" th:href="@{/registro}">Registrarse</a>
+                </li>
+            </ul>
+
+            <!-- Login y Registro alineados a la derecha -->
+            <ul class="navbar-nav ms-auto mb-5 mb-lg-0" th:if="${session.usuario != null}">
+                <li class="nav-item mx-5 ">
+                    <a class="nav-link active" aria-current="page" th:href="@{/micuenta}">Mi cuenta</a>
+                </li>
+                <li class="nav-item mx-2">
+                    <a class="nav-link" th:href="@{/logout}">Cerrar Sesion</a>
                 </li>
             </ul>
 

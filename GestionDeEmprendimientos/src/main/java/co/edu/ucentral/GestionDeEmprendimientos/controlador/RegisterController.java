@@ -1,47 +1,69 @@
 package co.edu.ucentral.GestionDeEmprendimientos.controlador;
 
-
-
+import co.edu.ucentral.GestionDeEmprendimientos.persistencia.entidades.Usuario;
+import co.edu.ucentral.GestionDeEmprendimientos.persistencia.repositorios.RolRepository;
+import co.edu.ucentral.GestionDeEmprendimientos.persistencia.servicios.UsuarioService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @AllArgsConstructor
 @Controller
 public class RegisterController {
 
-   /* private final UsuarioService usuarioService;
 
     @Autowired
-    public LoginController(UsuarioService usuarioService) {
-        this.usuarioService = usuarioService;
-    }*/
+    private UsuarioService usuarioService;
+    @Autowired
+    private RolRepository rolRepository;
 
-    @GetMapping({"/register"})
-    public String login() {
-        return "register"; // nombre del archivo login.html
+    @GetMapping("/registro")
+    public String registarPage(Model model) {
+        model.addAttribute("usuario", new Usuario());
+        return "registro";
     }
 
-    /*
-    @PostMapping({"/login"})
-    public String login(
-            @RequestParam("numeroDocumento") Integer numeroDocumento,
-            @RequestParam("contrasena") String contrasena,
-            Model model) {
+    @PostMapping("/registro")
+    public String registrarUsuario(@Valid @ModelAttribute("usuario") Usuario usuario,
+                                   BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("error", result);
+            return "registro";
 
-        Optional<Usuario> usuario = usuarioService.authenticate(numeroDocumento, contrasena);
-
-        if (usuario.isPresent()) {
-            model.addAttribute("usuario", usuario.get());
-            return "redirect:/welcome"; // Redirige a la página de bienvenida o dashboard
-        } else {
-            model.addAttribute("error", "Credenciales incorrectas. Inténtalo de nuevo.");
-            return "login"; // Regresa al formulario de login con el mensaje de error
         }
+        try {
+            usuarioService.registrarUsuario(usuario);
+            model.addAttribute("successMessage", "Usuario Registrado Correctamente");
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+        }
+
+        return "redirect:/login";
+    }
+    @PostMapping("/registroAdmin")
+    public String registrarUsuarioAdmin(@Valid @ModelAttribute("usuario") Usuario usuario,
+                                        BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("error", result);
+            return "Administrador/registroAdmin";
+        }
+
+        try {
+            usuarioService.registrarUsuarioAdmin(usuario);
+            model.addAttribute("successMessage", "Usuario Registrado Correctamente");
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            return "Administrador/registroAdmin";
+        }
+
+        return "redirect:/Administrador/registroAdmin";
     }
 
-    @GetMapping("/welcome")
-    public String showWelcomePage(Model model) {
-        return "welcome"; // Esta es la página de bienvenida o menú principal después del login exitoso
-    }*/
+
 }
