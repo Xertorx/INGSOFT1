@@ -46,24 +46,33 @@ public class RegisterController {
 
         return "redirect:/login";
     }
+    @GetMapping("/registroAdmin")
+    public String registrarAdminPage(Model model) {
+        model.addAttribute("usuario", new Usuario());
+        return "Administrador/registro";
+    }
     @PostMapping("/registroAdmin")
     public String registrarUsuarioAdmin(@Valid @ModelAttribute("usuario") Usuario usuario,
                                         BindingResult result, Model model) {
         if (result.hasErrors()) {
-            model.addAttribute("error", result);
-            return "Administrador/registroAdmin";
+            model.addAttribute("usuario", usuario); // Asegúrate de que el objeto usuario esté en el modelo
+            model.addAttribute("errorMessage", result);
+            return "Administrador/registro";
         }
 
         try {
             usuarioService.registrarUsuarioAdmin(usuario);
             model.addAttribute("successMessage", "Usuario Registrado Correctamente");
         } catch (IllegalArgumentException e) {
+            model.addAttribute("usuario", usuario); // Asegúrate de que el objeto usuario esté en el modelo si ocurre una excepción
             model.addAttribute("errorMessage", e.getMessage());
-            return "Administrador/registroAdmin";
+            return "Administrador/registro";
         }
 
-        return "redirect:/Administrador/registroAdmin";
+        // Redirigir a una vista de confirmación o lista de usuarios
+        return "redirect:registroAdmin";
     }
+
 
 
 }

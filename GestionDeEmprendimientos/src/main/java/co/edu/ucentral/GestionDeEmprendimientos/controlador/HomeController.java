@@ -20,9 +20,5 @@ public class HomeController {
     public String prueba() {
         return "LayoutAdmin"; // nombre del archivo login.html
     }
-    @GetMapping({"/registroAdmin"})
-    public String prueba2() {
-        return "Administrador/registro"; // nombre del archivo login.html
-    }
 
 }
