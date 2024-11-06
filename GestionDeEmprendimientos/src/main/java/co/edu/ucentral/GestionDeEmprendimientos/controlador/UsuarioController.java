@@ -26,4 +26,5 @@ public class UsuarioController {
         // Retorna el nombre de la vista (por ejemplo, usuarios.html)
         return "usuarios";
     }
+
 }

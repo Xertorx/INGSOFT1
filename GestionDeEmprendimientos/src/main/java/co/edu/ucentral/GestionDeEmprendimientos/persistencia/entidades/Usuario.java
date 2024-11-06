@@ -4,6 +4,7 @@ import java.util.Date;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "usuario")
@@ -29,12 +30,11 @@ public class Usuario {
     @Column(name = "correo")
     private String correo;
 
-
     @Column(name = "numero_telefono")
     private String numeroTelefono;
 
     @Column(name = "fecha_nacimiento")
-    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fechaNacimiento;
 
     @Column(name = "estado")
@@ -44,7 +44,7 @@ public class Usuario {
     private String contrasena;
 
     @ManyToOne
-    @JoinColumn(name = "rol",referencedColumnName = "codigo_rol")
+    @JoinColumn(name = "rol",referencedColumnName = "codigo_rol" , nullable = false)
     private Rol codigo_rol;
 
 }
