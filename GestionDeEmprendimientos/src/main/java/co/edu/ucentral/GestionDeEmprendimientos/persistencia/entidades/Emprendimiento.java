@@ -2,6 +2,8 @@ package co.edu.ucentral.GestionDeEmprendimientos.persistencia.entidades;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 @Entity
@@ -13,7 +15,9 @@ import java.util.Date;
 public class Emprendimiento {
 
     @Id
-    @Column(name = "codigo_emp")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_EMP")
+    @SequenceGenerator(name = "SEQ_EMP", sequenceName = "SEQ_EMP", allocationSize = 1)
+    @Column(name = "codigo_emp", updatable = false, nullable = false)
     private Integer codigoEmp;
 
     @Column(name = "nombre_emp")
@@ -26,20 +30,17 @@ public class Emprendimiento {
     private String descripcion;
 
     @Column(name = "categoria")
-    private Integer categoria;
+    private String categoria;
 
     @Column(name = "ubicacion")
     private String ubicacion;
 
     @Column(name = "fecha_fundacion")
-    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fechaFundacion;
 
-    @Column(name = "id_estado_emp")
-    private Integer idEstadoEmp;
-
-    @Column(name = "logo")
-    private String logo;
+    @Column(name = "estado_emp")
+    private String estadoEmp;
 
     @Column(name = "redes_sociales")
     private String redesSociales;
@@ -47,8 +48,14 @@ public class Emprendimiento {
     @Column(name = "telefono")
     private String telefono;
 
+    @Column(name = "email")
+    private String email;
+
     @ManyToOne
-    @JoinColumn(name = "numero_documento")
+    @JoinColumn(name = "usuario",referencedColumnName = "numero_documento" , nullable = false)
     private Usuario usuario;
+
+    @Embedded
+    private Imagenes imagenes;
 }
 

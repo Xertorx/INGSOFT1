@@ -1,5 +1,6 @@
 package co.edu.ucentral.GestionDeEmprendimientos.controlador;
 
+import co.edu.ucentral.GestionDeEmprendimientos.persistencia.entidades.Emprendimiento;
 import co.edu.ucentral.GestionDeEmprendimientos.persistencia.entidades.Usuario;
 import co.edu.ucentral.GestionDeEmprendimientos.persistencia.repositorios.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,5 +27,12 @@ public class UsuarioController {
         // Retorna el nombre de la vista (por ejemplo, usuarios.html)
         return "usuarios";
     }
+    @GetMapping("/emprendedor/micuenta")
+    public String mostrarMicuenta(Model model ) {
+        model.addAttribute("emprendimiento", new Emprendimiento());
+        return "Emprendedor/micuenta";
+    }
+
+
 
 }
