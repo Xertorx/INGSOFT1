@@ -12,14 +12,16 @@ import lombok.*;
 public class Planes {
 
     @Id
-    @Column(name = "id_plan")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_PLANES")
+    @SequenceGenerator(name = "SEQ_PLANES", sequenceName = "SEQ_PLANES", allocationSize = 1)
+    @Column(name = "id_plan", updatable = false, nullable = false)
     private Integer idPlan;
 
     @Column(name = "nombre_plan")
     private String nombrePlan;
 
     @Column(name = "tipo_plan")
-    private Integer tipoPlan;
+    private String tipoPlan;
 
     @Column(name = "descripcion")
     private String descripcion;

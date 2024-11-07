@@ -70,7 +70,7 @@ public class RegisterController {
         }
 
         // Redirigir a una vista de confirmación o lista de usuarios
-        return "redirect:registroAdmin";
+        return "redirect:/registroAdmin";
     }
 
 
