@@ -67,7 +67,7 @@
             <!-- Login y Registro alineados a la derecha -->
             <ul class="navbar-nav ms-auto mb-5 mb-lg-0" th:if="${session.usuario != null}">
                 <li class="nav-item mx-5 ">
-                    <a class="nav-link active" aria-current="page" th:href="@{/micuenta}">Mi cuenta</a>
+                    <a class="nav-link active" aria-current="page" th:href="@{/emprendedor/micuenta}">Mi cuenta</a>
                 </li>
                 <li class="nav-item mx-2">
                     <a class="nav-link" th:href="@{/logout}">Cerrar Sesion</a>
@@ -78,7 +78,7 @@
     </div>
 </nav>
 
-<footer class="bg-light text-center py-3" th:fragment="page_footer">
+<footer class="bg-light text-center py-3" th:fragment="page_footer" style="background-color: #dbeddc !important;">
     <p class="mb-0">&copy; <span id="current-year"></span> GSPE</p>
     <script>
 

@@ -33,7 +33,7 @@ public class UsuarioService {
 
     @Transactional
     public Usuario registrarUsuario(Usuario usuario) {
-        Rol rolPredeterminado = rolRepository.findByCodigoRol(1);
+        Rol rolPredeterminado = rolRepository.findByCodigoRol(2);
 
         Optional<Usuario> usuarioExistente = usuarioRepository.findByCorreo(usuario.getCorreo());
 
@@ -48,7 +48,7 @@ public class UsuarioService {
     }
     @Transactional
     public Usuario registrarUsuarioAdmin(Usuario usuario) {
-        Rol rolPredeterminado = rolRepository.findByCodigoRol(2);
+        Rol rolPredeterminado = rolRepository.findByCodigoRol(1);
         Optional<Usuario> usuarioExistente = usuarioRepository.findByCorreo(usuario.getCorreo());
 
         if (usuarioExistente.isPresent()) {
