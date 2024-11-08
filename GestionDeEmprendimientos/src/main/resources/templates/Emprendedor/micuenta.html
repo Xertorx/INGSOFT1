@@ -82,7 +82,7 @@
                 </li>
                 <li>
 
-                    <a th:href="@{/emprendedor/micuenta/hola}" class="nav-link py-5 border-bottom rounded-0"
+                    <a th:href="@{/emprendedor/micuenta/datos-personales}" class="nav-link py-5 border-bottom rounded-0"
                        title="Dashboard" data-bs-toggle="tooltip"
                        data-bs-placement="right" onclick="setActive(this);">
                         <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Dashboard">
@@ -117,160 +117,42 @@
             </ul>
         </div>
     </div>
-    <div class="flex-grow-1 " id="contenedor" style="width: 60%;">
-        <div class="d-flex justify-content-center align-items-center vh-100" id="div1"
-             th:classappend="${mostrarDiv1} ? '' : 'hidden'">
-            <div class="bg-white p-5 rounded-5 text-secondary shadow" style="width: 60rem">
-                <div class="d-flex justify-content-center">
-                    <img th:src="@{/assets/logo-icon.svg}" alt="logo-icon" style="height: 7rem"/>
-                </div>
-                <div class="text-center fs-1 fw-bold">Registrar Emprendimiento</div>
+    <div class="flex-grow-1" id="contenedor" style="width: 60%;">
 
-                <form id="registroForm" th:action="@{/emprendedor/micuenta/registrar-emprendimiento}"
-                      th:object="${emprendimiento}" method="post" enctype="multipart/form-data"
-                      onsubmit="event.preventDefault(); showConfirmationModal();">
-                    <!-- NIT -->
-                    <div class="input-group mt-4">
-                        <div class="input-group-text">
-                            <img th:src="@{/assets/id-icon.svg}" alt="id-icon" style="height: 1rem"/>
-                        </div>
-                        <input class="form-control bg-light" type="text" name="nit" placeholder="NIT" th:field="*{nit}"
-                               required/>
 
-                    </div>
-                    <!-- Nombre -->
-                    <div class="input-group mt-3">
-                        <div class="input-group-text">
-                            <img th:src="@{/assets/location-icon.svg}" alt="location-icon" style="height: 1rem"/>
-                        </div>
-                        <input class="form-control bg-light" type="text" name="nombre"
-                               placeholder="Nombre Emprendimiento" th:field="*{nombreEmp}" required/>
-                    </div>
-                    <!-- Descripción -->
-                    <div class="input-group mt-3">
-                        <textarea class="form-control bg-light" name="descripcion" rows="3" placeholder="Descripción"
-                                  th:field="*{descripcion}" required></textarea>
-                    </div>
+        <!-- Registrar Emprendimiento Form -->
+        <div th:replace="~{Emprendedor/registrarEmp :: registrarEmprendimiento}">
+        </div>
+        <!-- Informacion Cliente Form -->
+        <div th:replace="~{Emprendedor/datosUsuario :: datosPersonales}">
+        </div>
 
-                    <!-- Categoría -->
-                    <div class="input-group mt-3">
-                        <select class="form-select bg-light" name="categoria" th:field="*{categoria}" required>
-                            <option value="" selected disabled>Categoría</option>
-                            <option value="Tecnología">Tecnología</option>
-                            <option value="Comida">Comida</option>
-                            <option value="Moda">Moda</option>
-                            <option value="Educación">Educación</option>
-                            <option value="Salud">Salud</option>
-                            <!-- Agrega más opciones según sea necesario -->
-                        </select>
-                    </div>
 
-                    <!-- Ubicación -->
-                    <div class="input-group mt-3">
-                        <div class="input-group-text">
-                            <img th:src="@{/assets/location-icon.svg}" alt="location-icon" style="height: 1rem"/>
-                        </div>
-                        <input class="form-control bg-light" type="text" name="ubicacion" placeholder="Ubicación"
-                               th:field="*{ubicacion}" required/>
-                    </div>
+    </div>
 
-                    <!-- Fecha de Fundación -->
-                    <div class="input-group mt-3">
-                        <div class="input-group-text">
-                            <img th:src="@{/assets/date-icon.svg}" alt="date-icon" style="height: 1rem"/>
-                        </div>
-                        <input class="form-control bg-light" type="date" name="fecha_fundacion"
-                               th:field="*{fechaFundacion}" required/>
-                    </div>
+</div>
 
-                    <!-- Estado del Emprendimiento -->
-                    <div class="input-group mt-3">
-                        <select class="form-select bg-light" name="estado" th:field="*{estadoEmp}" required>
-                            <option value="" selected disabled>Estado del Emprendimiento</option>
-                            <option value="Activo">Activo</option>
-                            <option value="Inactivo">Inactivo</option>
-                            <option value="En crecimiento">En crecimiento</option>
-                        </select>
-                    </div>
-
-                    <!-- Logo o Imagen Representativa -->
-                    <div class="input-group mt-3">
-                        <label class="input-group-text" for="logoUpload">Logo</label>
-                        <input type="file" class="form-control" id="logoUpload" name="logo" accept="image/*"
-                               th:field="*{imagenes.logoFile}" required/>
-                    </div>
-
-                    <!-- Redes Sociales -->
-                    <div class="input-group mt-3">
-                        <div class="input-group-text">
-                            <img th:src="@{/assets/social-icon.svg}" alt="social-icon" style="height: 1rem"/>
-                        </div>
-                        <input class="form-control bg-light" type="text" name="redes_sociales"
-                               th:field="*{redesSociales}" placeholder="Redes Sociales (URL)"/>
-                    </div>
-
-                    <!-- Teléfono -->
-                    <div class="input-group mt-3">
-                        <div class="input-group-text">
-                            <img th:src="@{/assets/phone-icon.svg}" alt="phone-icon" style="height: 1rem"/>
-                        </div>
-                        <input class="form-control bg-light" type="tel" name="telefono" placeholder="Teléfono"
-                               th:field="*{telefono}" required/>
-                    </div>
-
-                    <!-- Correo Electrónico -->
-                    <div class="input-group mt-3">
-                        <div class="input-group-text">
-                            <img th:src="@{/assets/email-icon.svg}" alt="email-icon" style="height: 1rem"/>
-                        </div>
-                        <input class="form-control bg-light" type="email" name="correo" placeholder="Correo Electrónico"
-                               th:field="*{email}" required/>
-                    </div>
-
-                    <!-- Botón de Envío -->
-                    <button type="submit" class="btn text-white w-100 mt-4 fw-semibold shadow-sm">Registrar</button>
-                </form>
+<!-- Modal de Confirmación -->
+<div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmationModalLabel">Confirmar Registro</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div id="errorMessage" class="alert alert-danger mt-3" th:if="${errorMessage}" th:text="${errorMessage}">
+            <div class="modal-body">
+                ¿Estás seguro de que deseas registrar este emprendimiento?
             </div>
-            <div id="successMessage" class="alert alert-success mt-3" th:if="${successMessage}"
-                 th:text="${successMessage}">
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="submitForm()">Confirmar</button>
             </div>
         </div>
     </div>
-    <div class="flex-grow-1 " id="div2" style="width: 60%;" th:classappend="${mostrarDiv2} ? '' : 'hidden'">
-        <h1>holaa</h1>
-    </div>
-    !-- Modal de Confirmación -->
-    <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="confirmationModalLabel">Confirmar Registro</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    ¿Estás seguro de que deseas registrar este emprendimiento?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary" onclick="submitForm()">Confirmar</button>
-                </div>
-            </div>
-        </div>
-    </div>
+</div>
 
-    <!-- JavaScript para mostrar el modal y enviar el formulario -->
-    <script>
-        function showConfirmationModal() {
-            const modal = new bootstrap.Modal(document.getElementById('confirmationModal'));
-            modal.show();
-        }
 
-        function submitForm() {
-            document.getElementById('registroForm').submit(); // Usa el ID del formulario
-        }
-    </script>
 </div>
 
 <script>
@@ -282,9 +164,6 @@
             });
             element.classList.add('bg-success', 'bg-opacity-25');
         }
-
-        // Función para mostrar el div específico
-
     });
 </script>
 <script>
