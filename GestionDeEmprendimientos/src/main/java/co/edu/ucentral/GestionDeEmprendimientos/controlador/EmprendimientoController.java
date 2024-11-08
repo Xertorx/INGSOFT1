@@ -36,11 +36,6 @@ public class EmprendimientoController {
         model.addAttribute("mostrarDiv1", true); // Indicador para mostrar div1
         return "Emprendedor/micuenta";
     }
-    @GetMapping("/emprendedor/micuenta/hola")
-    public String hola(Model model) {
-        model.addAttribute("mostrarDiv2", true); // Indicador para mostrar div1
-        return "Emprendedor/micuenta";
-    }
 
     @PostMapping("/emprendedor/micuenta/registrar-emprendimiento")
     public String registrarEmprendimiento(@Valid @ModelAttribute("emprendimiento") Emprendimiento emprendimiento,
@@ -52,7 +47,7 @@ public class EmprendimientoController {
         if (result.hasErrors()) {
             model.addAttribute("emprendimiento", emprendimiento); // Asegura que el objeto esté en el modelo en caso de error
             model.addAttribute("errorMessage", result);
-            return "/emprendedor/micuenta";
+            return "/Emprendedor/micuenta";
         }
 
         try {
@@ -69,7 +64,7 @@ public class EmprendimientoController {
             model.addAttribute("errorMessage", e.getMessage());
         }
 
-        return "redirect:/emprendedor/micuenta";
+        return "redirect:/Emprendedor/micuenta";
     }
 
 

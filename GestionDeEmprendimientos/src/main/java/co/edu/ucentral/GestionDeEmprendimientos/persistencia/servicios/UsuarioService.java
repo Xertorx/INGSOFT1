@@ -47,6 +47,18 @@ public class UsuarioService {
         }
     }
     @Transactional
+    public Usuario actualizarUsuario(Usuario usuario) {
+
+        long count = usuarioRepository.countByCorreo(usuario.getCorreo());
+
+        if (count > 1) {
+            throw new IllegalArgumentException("El correo " + usuario.getCorreo() + " ya está en uso por otro usuario.");
+        } else {
+            return usuarioRepository.save(usuario);
+        }
+    }
+
+    @Transactional
     public Usuario registrarUsuarioAdmin(Usuario usuario) {
         Rol rolPredeterminado = rolRepository.findByCodigoRol(1);
         Optional<Usuario> usuarioExistente = usuarioRepository.findByCorreo(usuario.getCorreo());

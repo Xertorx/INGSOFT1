@@ -1,0 +1,95 @@
+<div class="d-flex justify-content-center align-items-center vh-100"
+     id="div2" th:classappend="${mostrarDiv2} ? '' : 'hidden'"
+     xmlns:th="http://www.w3.org/1999/xhtml" th:fragment="datosPersonales">
+
+    <div class="bg-white p-5 rounded-5 text-secondary shadow" style="width: 60rem">
+        <div class="text-center fs-1 fw-bold" style="padding-bottom: 3rem;">Datos Personales</div>
+
+        <form id="datosUsuario" th:action="@{/emprendedor/micuenta/datos-personales/actualizar}"
+              th:object="${usuario}" method="post"
+              onsubmit="event.preventDefault(); showConfirmationModal();"
+              xmlns:th="http://www.w3.org/1999/xhtml">
+
+            <!-- Número de Documento -->
+            <div class="input-group mt-4">
+                <label class="input-group-text" for="numeroDocumento">Número de Documento</label>
+                <input id="numeroDocumento" class="form-control bg-light disabled-input" type="text" name="numeroDocumento"
+                       th:field="*{numeroDocumento}" disabled/>
+            </div>
+
+            <!-- Nombres -->
+            <div class="input-group mt-3">
+                <label class="input-group-text" for="nombres">Nombres</label>
+                <input id="nombres" class="form-control bg-light disabled-input" type="text" name="nombres"
+                       th:field="*{nombres}" disabled/>
+            </div>
+
+            <!-- Apellidos -->
+            <div class="input-group mt-3">
+                <label class="input-group-text" for="apellidos">Apellidos</label>
+                <input id="apellidos" class="form-control bg-light disabled-input" type="text" name="apellidos"
+                       th:field="*{apellidos}" disabled/>
+            </div>
+
+            <!-- Tipo de Documento -->
+            <div class="input-group mt-3">
+                <label class="input-group-text" for="tipoDocumento">Tipo de Documento</label>
+                <select id="tipoDocumento" class="form-select bg-light disabled-input" name="tipoDocumento" th:field="*{tipoDocumento}" disabled>
+                    <option value="" disabled>Tipo de Documento</option>
+                    <option value="Cédula">Cédula</option>
+                    <option value="Pasaporte">Pasaporte</option>
+                    <option value="Tarjeta de Identidad">Tarjeta de Identidad</option>
+                </select>
+            </div>
+
+            <!-- Correo Electrónico -->
+            <div class="input-group mt-3">
+                <label class="input-group-text" for="correo">Correo Electrónico</label>
+                <input id="correo" class="form-control bg-light disabled-input" type="email" name="correo"
+                       th:field="*{correo}" disabled/>
+            </div>
+
+            <!-- Número de Teléfono -->
+            <div class="input-group mt-3">
+                <label class="input-group-text" for="numeroTelefono">Número de Teléfono</label>
+                <input id="numeroTelefono" class="form-control bg-light disabled-input" type="text" name="numeroTelefono"
+                       th:field="*{numeroTelefono}" disabled/>
+            </div>
+
+            <!-- Fecha de Nacimiento -->
+            <div class="input-group mt-3">
+                <label class="input-group-text" for="fechaNacimiento">Fecha de Nacimiento</label>
+                <input id="fechaNacimiento" class="form-control bg-light disabled-input" type="date" name="fechaNacimiento"
+                       th:field="*{fechaNacimiento}" disabled/>
+            </div>
+
+
+            <!-- Botón para Habilitar Edición -->
+            <button type="button" class="btn btn-secondary w-100 mt-2 fw-semibold shadow-sm" onclick="habilitarEdicion()">Editar Información</button>
+
+            <!-- Botón de Envío -->
+            <button type="submit" class="btn text-white w-100 mt-4 fw-semibold shadow-sm">Actualizar</button>
+        </form>
+        <div id="errorMessage" class="alert alert-danger mt-3" th:if="${errorMessage}" th:text="${errorMessage}">
+        </div>
+        <div id="successMessage" class="alert alert-success mt-3" th:if="${successMessage}"
+             th:text="${successMessage}">
+        </div>
+    </div>
+    <script>
+        function habilitarEdicion() {
+            const inputs = document.querySelectorAll('.disabled-input');
+            inputs.forEach(input => input.disabled = false);
+        }
+        function showConfirmationModal() {
+            const modal = new bootstrap.Modal(document.getElementById('confirmationModal'));
+            modal.show();
+        }
+
+        function submitForm() {
+            document.getElementById('datosUsuario').submit(); // Usa el ID del formulario
+        }
+    </script>
+
+
+</div>
