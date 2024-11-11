@@ -11,11 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class UsuarioController {
@@ -24,6 +24,8 @@ public class UsuarioController {
     private UsuarioRepository usuarioRepository;
     @Autowired
     private UsuarioService usuarioService;
+    @Autowired
+    private RolRepository rolRepository;
 
     @GetMapping("/usuarios")
     public String listarUsuarios(Model model) {
@@ -66,13 +68,16 @@ public class UsuarioController {
     //Actualizar Informacion
     @PostMapping("/emprendedor/micuenta/datos-personales/actualizar")
     public String actualizarInformacion(@Valid @ModelAttribute("usuario") Usuario usuario,
-                                        BindingResult result, Model model) {
+                                        BindingResult result, Model model, HttpSession session) {
 
+        Usuario usuarioLogueado = (Usuario) session.getAttribute("usuario");
         if (result.hasErrors()) {
             model.addAttribute("error", result);
             return "/Emprendedor/micuenta/datos-personales";
-
         }
+        usuario.setCodigo_rol(usuarioLogueado.getCodigo_rol());
+        usuario.setContrasena(usuarioLogueado.getContrasena());
+        usuario.setEstado(usuarioLogueado.getEstado());
         try {
             usuarioService.actualizarUsuario(usuario);
             model.addAttribute("successMessage", "Usuario actualizado Correctamente");
@@ -84,7 +89,15 @@ public class UsuarioController {
         model.addAttribute("mostrarDiv2", true); // Indicador para mostrar div1
         return "/Emprendedor/micuenta";
     }
-/*
+
+    //Registro
+
+    @GetMapping("/registro")
+    public String registarPage(Model model) {
+        model.addAttribute("usuario", new Usuario());
+        return "registro";
+    }
+
     @PostMapping("/registro")
     public String registrarUsuario(@Valid @ModelAttribute("usuario") Usuario usuario,
                                    BindingResult result, Model model) {
@@ -102,6 +115,70 @@ public class UsuarioController {
 
         return "redirect:/login";
     }
+    @GetMapping("/registroAdmin")
+    public String registrarAdminPage(Model model) {
+        model.addAttribute("usuario", new Usuario());
+        return "Administrador/registro";
+    }
+    @PostMapping("/registroAdmin")
+    public String registrarUsuarioAdmin(@Valid @ModelAttribute("usuario") Usuario usuario,
+                                        BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("usuario", usuario); // Asegúrate de que el objeto usuario esté en el modelo
+            model.addAttribute("errorMessage", result);
+            return "Administrador/registro";
+        }
 
-*/
+        try {
+            usuarioService.registrarUsuarioAdmin(usuario);
+            model.addAttribute("successMessage", "Usuario Registrado Correctamente");
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("usuario", usuario); // Asegúrate de que el objeto usuario esté en el modelo si ocurre una excepción
+            model.addAttribute("errorMessage", e.getMessage());
+            return "Administrador/registro";
+        }
+
+        // Redirigir a una vista de confirmación o lista de usuarios
+        return "redirect:/registroAdmin";
+    }
+
+
+    //Login
+
+
+    @GetMapping("/login")
+    public String loginPage(Model model) {
+        return "login";
+    }
+
+    @PostMapping("/login")
+    public String login(@RequestParam("correo") String correo,
+                        @RequestParam("contrasena") String contrasena,
+                        Model model, HttpSession session) {
+        Optional<Usuario> optionalUsuario = usuarioService.authenticate(correo, contrasena);
+
+        if (optionalUsuario.isEmpty()) {
+            model.addAttribute("error", "Correo o contraseña incorrectos.");
+            return "login";
+        }
+        Usuario usuario = optionalUsuario.get();
+
+        Integer rolCodigo = usuario.getCodigo_rol().getCodigo_rol();
+
+        session.setAttribute("usuario", usuario);
+        if (rolCodigo == 1) {
+            return "redirect:/"; // Redirige a la página para rol 1
+        } else if (rolCodigo == 2) {
+            return "redirect:/"; // Redirige a la página para rol 2
+        } else {
+            model.addAttribute("error", "Rol no reconocido.");
+            return "login";
+        }
+    }
+    @RequestMapping("/logout")
+    public String logout(HttpSession session, SessionStatus status) {
+        session.invalidate();
+        status.setComplete();
+        return "redirect:/";
+    }
 }
