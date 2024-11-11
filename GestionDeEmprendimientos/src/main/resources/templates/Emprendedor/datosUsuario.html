@@ -1,7 +1,11 @@
-<div class="d-flex justify-content-center align-items-center vh-100"
+<div class="d-flex flex-column justify-content-center align-items-center vh-100 "
      id="div2" th:classappend="${mostrarDiv2} ? '' : 'hidden'"
      xmlns:th="http://www.w3.org/1999/xhtml" th:fragment="datosPersonales">
-
+    <form id="solicitud" th:action="@{/emprendedor/micuenta/datos-personales/solicitud}" method="post"
+          onsubmit="event.preventDefault(); showConfirmationModal();"
+          xmlns:th="http://www.w3.org/1999/xhtml" >
+        <button type="submit" class="btn btn-warning w-100 mb-3 fw-semibold shadow-sm">Solicitar Deshabilitar</button>
+    </form>
     <div class="bg-white p-5 rounded-5 text-secondary shadow" style="width: 60rem">
         <div class="text-center fs-1 fw-bold" style="padding-bottom: 3rem;">Datos Personales</div>
 
@@ -13,7 +17,8 @@
             <!-- Número de Documento -->
             <div class="input-group mt-4">
                 <label class="input-group-text" for="numeroDocumento">Número de Documento</label>
-                <input id="numeroDocumento" class="form-control bg-light disabled-input" type="text" name="numeroDocumento"
+                <input id="numeroDocumento" class="form-control bg-light disabled-input" type="text"
+                       name="numeroDocumento"
                        th:field="*{numeroDocumento}" disabled/>
             </div>
 
@@ -34,7 +39,8 @@
             <!-- Tipo de Documento -->
             <div class="input-group mt-3">
                 <label class="input-group-text" for="tipoDocumento">Tipo de Documento</label>
-                <select id="tipoDocumento" class="form-select bg-light disabled-input" name="tipoDocumento" th:field="*{tipoDocumento}" disabled>
+                <select id="tipoDocumento" class="form-select bg-light disabled-input" name="tipoDocumento"
+                        th:field="*{tipoDocumento}" disabled>
                     <option value="" disabled>Tipo de Documento</option>
                     <option value="Cédula">Cédula</option>
                     <option value="Pasaporte">Pasaporte</option>
@@ -52,20 +58,24 @@
             <!-- Número de Teléfono -->
             <div class="input-group mt-3">
                 <label class="input-group-text" for="numeroTelefono">Número de Teléfono</label>
-                <input id="numeroTelefono" class="form-control bg-light disabled-input" type="text" name="numeroTelefono"
+                <input id="numeroTelefono" class="form-control bg-light disabled-input" type="text"
+                       name="numeroTelefono"
                        th:field="*{numeroTelefono}" disabled/>
             </div>
 
             <!-- Fecha de Nacimiento -->
             <div class="input-group mt-3">
                 <label class="input-group-text" for="fechaNacimiento">Fecha de Nacimiento</label>
-                <input id="fechaNacimiento" class="form-control bg-light disabled-input" type="date" name="fechaNacimiento"
+                <input id="fechaNacimiento" class="form-control bg-light disabled-input" type="date"
+                       name="fechaNacimiento"
                        th:field="*{fechaNacimiento}" disabled/>
             </div>
 
 
             <!-- Botón para Habilitar Edición -->
-            <button type="button" class="btn btn-secondary w-100 mt-2 fw-semibold shadow-sm" onclick="habilitarEdicion()">Editar Información</button>
+            <button type="button" class="btn btn-secondary w-100 mt-2 fw-semibold shadow-sm"
+                    onclick="habilitarEdicion()">Editar Información
+            </button>
 
             <!-- Botón de Envío -->
             <button type="submit" class="btn text-white w-100 mt-4 fw-semibold shadow-sm">Actualizar</button>
@@ -88,6 +98,16 @@
 
         function submitForm() {
             document.getElementById('datosUsuario').submit(); // Usa el ID del formulario
+        }
+
+        //Solicitud
+         function showConfirmationModal() {
+            const modal = new bootstrap.Modal(document.getElementById('confirmationModal'));
+            modal.show();
+        }
+
+        function submitForm() {
+            document.getElementById('solicitud').submit();
         }
     </script>
 
