@@ -12,7 +12,7 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Emprendimiento {
+public class Emprendimientos {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_EMP")
@@ -50,6 +50,10 @@ public class Emprendimiento {
 
     @Column(name = "email")
     private String email;
+
+    @ManyToOne
+    @JoinColumn(name = "workflow_id", referencedColumnName = "id_workflow")
+    private WorkFlow workFlow;
 
     @ManyToOne
     @JoinColumn(name = "usuario",referencedColumnName = "numero_documento" , nullable = false)

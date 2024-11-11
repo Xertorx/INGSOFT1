@@ -1,0 +1,68 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html lang="en" data-bs-theme="auto">
+
+<head th:replace="~{layoutAdmin :: page_head}">
+</head>
+
+<body>
+
+
+<main class="d-flex flex-nowrap">
+
+    <div th:replace="~{layoutAdmin :: main}">
+
+    </div>
+
+    <div class="d-flex flex-column justify-content-center align-items-center flex-grow-1">
+        <div class="container mt-4" style="max-width: 800px;">
+            <h2 class="text-dark text-center pb-5">Lista de Emprendimientos</h2>
+
+            <!-- Tabla -->
+            <table class="table table-bordered table-striped">
+                <thead class="table-dark">
+                <tr>
+                    <th>Nombre</th>
+                    <th>NIT</th>
+                    <th>Categoria</th>
+                    <th>Estado</th>
+                    <th>Etapa</th>
+                    <th>Emprendedor</th>
+                    <th>Acciones</th>
+
+                    <!--    Nombre del Emprendimientos, Nombre del Emprendedor, NIT, Categoría, Estado del emprendimientos, etapa,
+                      estado en el que se encuentra en el WorkFlow y un botón con la información adicional. La información
+                      se mostrará en forma de lista de cada uno de los emprendimientos registrados.-->
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr th:each="emprendimiento : ${emprendimientos}">
+                      <td th:text="${emprendimiento.nombreEmp}"></td>
+                      <td th:text="${emprendimiento.nit}"></td>
+                      <td th:text="${emprendimiento.estadoEmp}"></td>
+                      <td th:text="${emprendimiento.categoria}"></td>
+                      <td th:text="${emprendimiento.workFlow.etapa}"></td> <!-- Accediendo a la etapa de workFlow -->
+                      <td th:text="${emprendimiento.usuario.nombre}"></td> <!-- Accediendo al nombre del emprendedor -->
+                      <td>
+                          <button type="button" class="btn btn-warning btn-sm me-1">
+                              Editar
+                          </button>
+                          <button type="button" class="btn btn-danger btn-sm">
+                              Eliminar
+                          </button>
+                      </td>
+                  </tr>
+                  </tbody>
+              </table>
+          </div>
+      </div>
+</main>
+<footer th:replace="~{layoutAdmin :: page_footer} ">
+
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+<script th:src="@{/assets/sidebars.js}"></script>
+</body>
+</html>

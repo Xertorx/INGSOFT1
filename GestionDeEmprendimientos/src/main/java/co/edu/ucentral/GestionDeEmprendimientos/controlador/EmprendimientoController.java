@@ -1,6 +1,6 @@
 package co.edu.ucentral.GestionDeEmprendimientos.controlador;
 
-import co.edu.ucentral.GestionDeEmprendimientos.persistencia.entidades.Emprendimiento;
+import co.edu.ucentral.GestionDeEmprendimientos.persistencia.entidades.Emprendimientos;
 import co.edu.ucentral.GestionDeEmprendimientos.persistencia.entidades.Usuario;
 import co.edu.ucentral.GestionDeEmprendimientos.persistencia.servicios.EmprendimientoService;
 import jakarta.servlet.http.HttpSession;
@@ -13,7 +13,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -32,34 +31,34 @@ public class EmprendimientoController {
 
     @GetMapping("/emprendedor/micuenta/registrar-emprendimiento")
     public String registrarEmprendimientoDiv(Model model) {
-        model.addAttribute("emprendimiento", new Emprendimiento());
+        model.addAttribute("emprendimiento", new Emprendimientos());
         model.addAttribute("mostrarDiv1", true); // Indicador para mostrar div1
         return "Emprendedor/micuenta";
     }
 
-    @PostMapping("/emprendedor/micuenta/registrar-emprendimiento")
-    public String registrarEmprendimiento(@Valid @ModelAttribute("emprendimiento") Emprendimiento emprendimiento,
+    @PostMapping("/emprendedor/micuenta/registrar-emprendimientos")
+    public String registrarEmprendimiento(@Valid @ModelAttribute("emprendimientos") Emprendimientos emprendimientos,
                                           BindingResult result,
                                           Model model,HttpSession session) {
         Usuario usuario = (Usuario) session.getAttribute("usuario");
-        emprendimiento.setUsuario(usuario);
-       // emprendimiento.set
+        emprendimientos.setUsuario(usuario);
+       // emprendimientos.set
         if (result.hasErrors()) {
-            model.addAttribute("emprendimiento", emprendimiento); // Asegura que el objeto esté en el modelo en caso de error
+            model.addAttribute("emprendimientos", emprendimientos); // Asegura que el objeto esté en el modelo en caso de error
             model.addAttribute("errorMessage", result);
             return "/Emprendedor/micuenta";
         }
 
         try {
-            MultipartFile logoFile = emprendimiento.getImagenes().getLogoFile();
+            MultipartFile logoFile = emprendimientos.getImagenes().getLogoFile();
             if (logoFile != null && !logoFile.isEmpty()) {
                 Integer documento = usuario.getNumeroDocumento();
                 String logoUrl = guardarArchivoYObtenerUrl(logoFile,documento);
-                emprendimiento.getImagenes().setLogo(logoUrl); // Asigna la URL del logo al campo de tipo String
+                emprendimientos.getImagenes().setLogo(logoUrl); // Asigna la URL del logo al campo de tipo String
             }
 
-            emprendimientoService.registrarEmprendimiento(emprendimiento);
-            model.addAttribute("successMessage", "Emprendimiento Registrado Correctamente");
+            emprendimientoService.registrarEmprendimiento(emprendimientos);
+            model.addAttribute("successMessage", "Emprendimientos Registrado Correctamente");
         } catch (IllegalArgumentException e) {
             model.addAttribute("errorMessage", e.getMessage());
         }
@@ -67,7 +66,11 @@ public class EmprendimientoController {
         return "redirect:/Emprendedor/micuenta";
     }
 
-
+    @GetMapping("/emprendimiento/ver")
+    public String cargarPlanes(Model model) {
+        model.addAttribute("emprendimientos", emprendimientoService.listarEmprendimientos());
+        return "Administrador/Emprendimientos/verEmprendimientos";
+    }
 
 
     private String guardarArchivoYObtenerUrl(MultipartFile file, Integer documento) {

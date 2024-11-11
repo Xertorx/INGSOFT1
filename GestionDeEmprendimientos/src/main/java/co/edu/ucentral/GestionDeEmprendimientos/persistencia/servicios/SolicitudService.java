@@ -1,8 +1,6 @@
 package co.edu.ucentral.GestionDeEmprendimientos.persistencia.servicios;
 
-import co.edu.ucentral.GestionDeEmprendimientos.persistencia.entidades.Emprendimiento;
 import co.edu.ucentral.GestionDeEmprendimientos.persistencia.entidades.Solicitudes;
-import co.edu.ucentral.GestionDeEmprendimientos.persistencia.repositorios.EmprendimientoRepository;
 import co.edu.ucentral.GestionDeEmprendimientos.persistencia.repositorios.SolicitudRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

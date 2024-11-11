@@ -1,11 +1,12 @@
 package co.edu.ucentral.GestionDeEmprendimientos.persistencia.servicios;
 
-import co.edu.ucentral.GestionDeEmprendimientos.persistencia.entidades.Emprendimiento;
-import co.edu.ucentral.GestionDeEmprendimientos.persistencia.entidades.Usuario;
+import co.edu.ucentral.GestionDeEmprendimientos.persistencia.entidades.Emprendimientos;
+import co.edu.ucentral.GestionDeEmprendimientos.persistencia.entidades.Planes;
 import co.edu.ucentral.GestionDeEmprendimientos.persistencia.repositorios.EmprendimientoRepository;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class EmprendimientoService {
@@ -18,9 +19,13 @@ public class EmprendimientoService {
     }
 
     @Transactional
-    public Emprendimiento registrarEmprendimiento(Emprendimiento emprendimiento) {
+    public Emprendimientos registrarEmprendimiento(Emprendimientos emprendimientos) {
 
-            return emprendimientoRepository.save(emprendimiento);
+            return emprendimientoRepository.save(emprendimientos);
+    }
+    @Transactional(readOnly = true)
+    public List<Emprendimientos> listarEmprendimientos() {
+        return emprendimientoRepository.findAll();
     }
 
 }

@@ -23,10 +23,15 @@ public class PlanesController {
     @Autowired
     private PlanesService planesService;
 
-    @GetMapping("/registroPlan")
+    @GetMapping("planes/registrar")
     public String cargarPage(Model model) {
         model.addAttribute("planes", new Planes());
-        return "Administrador/planes";
+        return "Administrador/Planes/registrarPlan";
+    }
+    @GetMapping("planes/ver")
+    public String cargarPlanes(Model model) {
+        model.addAttribute("planes", planesService.listarPlanes());
+        return "Administrador/Planes/verPlanes";
     }
 
     @PostMapping("/registroPlan")
@@ -34,20 +39,16 @@ public class PlanesController {
                                 BindingResult result, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("errorMessage", "Error en los datos del formulario");
-            return "Administrador/planes";
+            return "Administrador/Planes/registrarPlan";
         }
         try {
             planesService.registrarPlan(planes);
             model.addAttribute("successMessage", "Plan Registrado Correctamente");
         } catch (IllegalArgumentException e) {
             model.addAttribute("errorMessage", e.getMessage());
-            return "Administrador/planes";
+            return "Administrador/Planes/registrarPlan";
         }
-        return "redirect:/registroPlan";
+        return "redirect:/planes/registrar";
     }
-
-
-
-
 
 }

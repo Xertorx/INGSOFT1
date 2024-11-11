@@ -1,6 +1,6 @@
 package co.edu.ucentral.GestionDeEmprendimientos.controlador;
 
-import co.edu.ucentral.GestionDeEmprendimientos.persistencia.entidades.Emprendimiento;
+import co.edu.ucentral.GestionDeEmprendimientos.persistencia.entidades.Emprendimientos;
 import co.edu.ucentral.GestionDeEmprendimientos.persistencia.entidades.Usuario;
 import co.edu.ucentral.GestionDeEmprendimientos.persistencia.repositorios.RolRepository;
 import co.edu.ucentral.GestionDeEmprendimientos.persistencia.repositorios.UsuarioRepository;
@@ -46,7 +46,7 @@ public class UsuarioController {
             // Redirige a la página de inicio de sesión o muestra un mensaje de error
             return "redirect:../login";
         }
-        model.addAttribute("emprendimiento", new Emprendimiento());
+        model.addAttribute("emprendimiento", new Emprendimientos());
         model.addAttribute("usuario", usuario);
         return "Emprendedor/micuenta";
     }
@@ -60,7 +60,7 @@ public class UsuarioController {
             return "redirect:/login";
         }
 
-        model.addAttribute("emprendimiento", new Emprendimiento());
+        model.addAttribute("emprendimiento", new Emprendimientos());
         model.addAttribute("usuario", usuario);
         model.addAttribute("mostrarDiv2", true); // Indicador para mostrar div1
         return "Emprendedor/micuenta";
@@ -84,7 +84,7 @@ public class UsuarioController {
         } catch (IllegalArgumentException e) {
             model.addAttribute("errorMessage", e.getMessage());
         }
-        model.addAttribute("emprendimiento", new Emprendimiento());
+        model.addAttribute("emprendimiento", new Emprendimientos());
         model.addAttribute("usuario", usuario);
         model.addAttribute("mostrarDiv2", true); // Indicador para mostrar div1
         return "/Emprendedor/micuenta";
@@ -102,7 +102,7 @@ public class UsuarioController {
     public String registrarUsuario(@Valid @ModelAttribute("usuario") Usuario usuario,
                                    BindingResult result, Model model) {
         if (result.hasErrors()) {
-            model.addAttribute("error", result);
+            model.addAttribute("errorMessage", result);
             return "registro";
 
         }

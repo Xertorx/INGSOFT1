@@ -1,9 +1,8 @@
 package co.edu.ucentral.GestionDeEmprendimientos.controlador;
 
-import co.edu.ucentral.GestionDeEmprendimientos.persistencia.entidades.Emprendimiento;
+import co.edu.ucentral.GestionDeEmprendimientos.persistencia.entidades.Emprendimientos;
 import co.edu.ucentral.GestionDeEmprendimientos.persistencia.entidades.Solicitudes;
 import co.edu.ucentral.GestionDeEmprendimientos.persistencia.entidades.Usuario;
-import co.edu.ucentral.GestionDeEmprendimientos.persistencia.repositorios.RolRepository;
 import co.edu.ucentral.GestionDeEmprendimientos.persistencia.repositorios.UsuarioRepository;
 import co.edu.ucentral.GestionDeEmprendimientos.persistencia.servicios.SolicitudService;
 import co.edu.ucentral.GestionDeEmprendimientos.persistencia.servicios.UsuarioService;
@@ -14,11 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.support.SessionStatus;
 
 import java.util.Date;
-import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class SolicitudController {
@@ -53,7 +49,7 @@ public class SolicitudController {
         } catch (IllegalArgumentException e) {
             model.addAttribute("errorMessage", e.getMessage());
         }
-        model.addAttribute("emprendimiento", new Emprendimiento());
+        model.addAttribute("emprendimiento", new Emprendimientos());
         model.addAttribute("usuario", usuarioLogueado);
         model.addAttribute("mostrarDiv2", true); // Indicador para mostrar div1
         return "/Emprendedor/micuenta";
