@@ -120,9 +120,9 @@
     <div class="flex-grow-1" id="contenedor" style="width: 60%;">
 
 
-        <!-- Registrar Emprendimientos Form -->
+        <!-- Registrar Emprendimientos Form
         <div th:replace="~{Emprendedor/registrarEmp :: registrarEmprendimiento}">
-        </div>
+        </div> -->
         <!-- Informacion Cliente Form -->
         <div th:replace="~{Emprendedor/datosUsuario :: datosPersonales}">
         </div>
@@ -132,13 +132,32 @@
 
 </div>
 
-<!-- Modal de Confirmación -->
+<!-- Modal de Confirmación Registrar -->
+<div class="modal fade" id="confirmationModalRegistrar" tabindex="-1" aria-labelledby="confirmationModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmationModalLabel">Confirmar Registro Emprendimiento</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ¿Estás seguro de que deseas continuar con la accion?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="submitForm()">Confirmar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal de Confirmación solicitud -->
 <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel"
      aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="confirmationModalLabel">Confirmar Accion</h5>
+                <h5 class="modal-title" id="confirmationModalLabel2">Confirmar Registro Solicitud</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -152,7 +171,24 @@
     </div>
 </div>
 
-
+<!-- Modal de Confirmación solicitud -->
+<div class="modal fade" id="confirmationModalActualizar" tabindex="-1" aria-labelledby="confirmationModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmationModalLabel3">Confirmar Registro Solicitud</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ¿Estás seguro de que deseas continuar con la accion?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="submitForm()">Confirmar</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>

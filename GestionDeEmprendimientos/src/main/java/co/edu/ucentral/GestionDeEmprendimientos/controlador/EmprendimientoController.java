@@ -29,11 +29,11 @@ public class EmprendimientoController {
     @Autowired
     private EmprendimientoService emprendimientoService;
 
-    @GetMapping("/emprendedor/micuenta/registrar-emprendimiento")
+    @GetMapping("/emprendedor/micuenta/registrar-emprendimientos")
     public String registrarEmprendimientoDiv(Model model) {
-        model.addAttribute("emprendimiento", new Emprendimientos());
-        model.addAttribute("mostrarDiv1", true); // Indicador para mostrar div1
-        return "Emprendedor/micuenta";
+
+        model.addAttribute("emprendimientos", new Emprendimientos());
+        return "/Emprendedor/datos";
     }
 
     @PostMapping("/emprendedor/micuenta/registrar-emprendimientos")
@@ -42,11 +42,11 @@ public class EmprendimientoController {
                                           Model model,HttpSession session) {
         Usuario usuario = (Usuario) session.getAttribute("usuario");
         emprendimientos.setUsuario(usuario);
-       // emprendimientos.set
+
         if (result.hasErrors()) {
-            model.addAttribute("emprendimientos", emprendimientos); // Asegura que el objeto esté en el modelo en caso de error
+            model.addAttribute("emprendimientos", emprendimientos);
             model.addAttribute("errorMessage", result);
-            return "/Emprendedor/micuenta";
+            return "/Emprendedor/datos";
         }
 
         try {
@@ -63,7 +63,7 @@ public class EmprendimientoController {
             model.addAttribute("errorMessage", e.getMessage());
         }
 
-        return "redirect:/Emprendedor/micuenta";
+        return "redirect:/Emprendedor/datos";
     }
 
     @GetMapping("/emprendimiento/ver")

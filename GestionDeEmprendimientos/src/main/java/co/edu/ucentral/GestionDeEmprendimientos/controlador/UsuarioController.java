@@ -29,13 +29,10 @@ public class UsuarioController {
 
     @GetMapping("/usuarios")
     public String listarUsuarios(Model model) {
-        // Obtener la lista de todos los usuarios
         List<Usuario> listaUsuarios = usuarioRepository.findAll();
 
-        // Agregar la lista de usuarios al modelo para que Thymeleaf pueda acceder a ella
         model.addAttribute("usuarios", listaUsuarios);
 
-        // Retorna el nombre de la vista (por ejemplo, usuarios.html)
         return "usuarios";
     }
     @GetMapping("/emprendedor/micuenta")
@@ -43,13 +40,13 @@ public class UsuarioController {
 
         Usuario usuario = (Usuario) session.getAttribute("usuario");
         if (usuario == null) {
-            // Redirige a la página de inicio de sesión o muestra un mensaje de error
             return "redirect:../login";
         }
-        model.addAttribute("emprendimiento", new Emprendimientos());
+        model.addAttribute("emprendimientos", new Emprendimientos());
         model.addAttribute("usuario", usuario);
         return "Emprendedor/micuenta";
     }
+
     //Mostrar Informacion del usuario logueado
     @GetMapping("/emprendedor/micuenta/datos-personales")
     public String informacionUsuarioLogueado(Model model,HttpSession session) {
@@ -60,7 +57,7 @@ public class UsuarioController {
             return "redirect:/login";
         }
 
-        model.addAttribute("emprendimiento", new Emprendimientos());
+        model.addAttribute("emprendimientos", new Emprendimientos());
         model.addAttribute("usuario", usuario);
         model.addAttribute("mostrarDiv2", true); // Indicador para mostrar div1
         return "Emprendedor/micuenta";
@@ -84,7 +81,7 @@ public class UsuarioController {
         } catch (IllegalArgumentException e) {
             model.addAttribute("errorMessage", e.getMessage());
         }
-        model.addAttribute("emprendimiento", new Emprendimientos());
+        model.addAttribute("emprendimientos", new Emprendimientos());
         model.addAttribute("usuario", usuario);
         model.addAttribute("mostrarDiv2", true); // Indicador para mostrar div1
         return "/Emprendedor/micuenta";
@@ -107,6 +104,7 @@ public class UsuarioController {
 
         }
         try {
+            usuario.setCodigo_rol(rolRepository.findByCodigoRol(1));
             usuarioService.registrarUsuario(usuario);
             model.addAttribute("successMessage", "Usuario Registrado Correctamente");
         } catch (IllegalArgumentException e) {
@@ -115,6 +113,7 @@ public class UsuarioController {
 
         return "redirect:/login";
     }
+
     @GetMapping("/registroAdmin")
     public String registrarAdminPage(Model model) {
         model.addAttribute("usuario", new Usuario());
@@ -130,6 +129,7 @@ public class UsuarioController {
         }
 
         try {
+            usuario.setCodigo_rol(rolRepository.findByCodigoRol(2));
             usuarioService.registrarUsuarioAdmin(usuario);
             model.addAttribute("successMessage", "Usuario Registrado Correctamente");
         } catch (IllegalArgumentException e) {
@@ -139,7 +139,7 @@ public class UsuarioController {
         }
 
         // Redirigir a una vista de confirmación o lista de usuarios
-        return "redirect:/registroAdmin";
+        return "redirect:/{registroAdmin}";
     }
 
 
