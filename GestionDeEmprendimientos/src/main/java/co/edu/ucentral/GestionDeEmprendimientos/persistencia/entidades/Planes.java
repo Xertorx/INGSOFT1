@@ -20,9 +20,6 @@ public class Planes {
     @Column(name = "nombre_plan")
     private String nombrePlan;
 
-    @Column(name = "tipo_plan")
-    private String tipoPlan;
-
     @Column(name = "descripcion")
     private String descripcion;
 

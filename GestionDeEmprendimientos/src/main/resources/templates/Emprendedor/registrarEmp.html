@@ -8,8 +8,8 @@
     </div>
     <div class="text-center fs-1 fw-bold">Registrar Emprendimiento</div>
 
-    <form id="registroForm" th:action="@{/emprendedor/micuenta/registrar-emprendimiento}"
-          th:object="${emprendimiento}" method="post" enctype="multipart/form-data"
+    <form id="registroForm" th:action="@{/emprendedor/micuenta/registrar-emprendimientos}"
+          th:object="${emprendimientos}" method="post" enctype="multipart/form-data"
           onsubmit="event.preventDefault(); showConfirmationModal();">
       <!-- NIT -->
       <div class="input-group mt-4">
@@ -65,7 +65,7 @@
                th:field="*{fechaFundacion}" required/>
       </div>
 
-      <!-- Estado del Emprendimiento -->
+      <!-- Estado del Emprendimientos -->
       <div class="input-group mt-3">
         <select class="form-select bg-light" name="estado" th:field="*{estadoEmp}" required>
           <option value="" selected disabled>Estado del Emprendimiento</option>
@@ -120,12 +120,12 @@
   </div>
   <script>
     function showConfirmationModal() {
-        const modal = new bootstrap.Modal(document.getElementById('confirmationModal'));
+        const modal = new bootstrap.Modal(document.getElementById('confirmationModalRegistrar'));
         modal.show();
     }
 
     function submitForm() {
-        document.getElementById('datosUsuario').submit(); // Usa el ID del formulario
+        document.getElementById('registroForm').submit();
     }
   </script>
 </div>

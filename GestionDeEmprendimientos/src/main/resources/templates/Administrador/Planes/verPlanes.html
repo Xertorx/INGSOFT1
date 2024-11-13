@@ -1,0 +1,63 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html lang="en" data-bs-theme="auto">
+
+<head th:replace="~{layoutAdmin :: page_head}">
+</head>
+
+<body >
+
+
+<main class="d-flex flex-nowrap" >
+
+    <div th:replace="~{layoutAdmin :: main}">
+
+    </div>
+
+    <div class="d-flex flex-column justify-content-center align-items-center flex-grow-1">
+        <div class="container mt-4" style="max-width: 800px;">
+            <h2 class="text-dark text-center pb-5">Lista de Planes</h2>
+
+            <!-- Tabla -->
+            <table class="table table-bordered table-striped">
+                <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre del Plan</th>
+                    <th>Precio</th>
+                    <th>Descripción</th>
+                    <th>Tipo Plan</th>
+                    <th>Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="plan : ${planes}">
+                    <td th:text="${plan.idPlan}">1</td>
+                    <td th:text="${plan.nombrePlan}">Plan Básico</td>
+                    <td th:text="${plan.precio}">$10.00</td>
+                    <td th:text="${plan.descripcion}">Descripción del plan</td>
+                    <td th:text="${plan.tipoPlan}">Tipo del plan</td>
+                    <td>
+                        <button type="button" class="btn btn-warning btn-sm me-1" >
+                            Editar
+                        </button>
+                        <button type="button" class="btn btn-danger btn-sm" >
+                            Eliminar
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"></script>
+</main>
+<footer th:replace="~{layoutAdmin :: page_footer} ">
+
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script th:src="@{/assets/sidebars.js}"></script>
+</body>
+</html>
