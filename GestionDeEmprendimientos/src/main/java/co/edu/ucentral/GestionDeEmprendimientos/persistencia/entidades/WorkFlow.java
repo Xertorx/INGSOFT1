@@ -2,6 +2,7 @@ package co.edu.ucentral.GestionDeEmprendimientos.persistencia.entidades;
 
 import jakarta.persistence.*;
 import lombok.*;
+
 import java.util.List;
 
 @Entity
@@ -18,12 +19,9 @@ public class WorkFlow {
     @Column(name = "id_workflow", updatable = false, nullable = false)
     private Integer idWorkFlow;
 
-    @Column(name = "etapa")
-    private Integer etapa;
-
-    @Column(name = "descripcion")
-    private String descripcion;
+    @OneToOne(mappedBy = "workFlow")
+    private Emprendimientos emprendimiento;
 
     @OneToMany(mappedBy = "workFlow")
-    private List<Emprendimientos> emprendimientos;
+    private List<Etapa> etapas;
 }
