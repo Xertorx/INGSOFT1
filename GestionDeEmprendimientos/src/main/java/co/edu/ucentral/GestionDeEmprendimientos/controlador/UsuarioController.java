@@ -42,8 +42,6 @@ public class UsuarioController {
         if (usuario == null) {
             return "redirect:../login";
         }
-        model.addAttribute("emprendimientos", new Emprendimientos());
-        model.addAttribute("usuario", usuario);
         return "Emprendedor/micuenta";
     }
 
@@ -57,10 +55,8 @@ public class UsuarioController {
             return "redirect:/login";
         }
 
-        model.addAttribute("emprendimientos", new Emprendimientos());
-        model.addAttribute("usuario", usuario);
-        model.addAttribute("mostrarDiv2", true); // Indicador para mostrar div1
-        return "Emprendedor/micuenta";
+        model.addAttribute("usuario",usuario);
+        return "Emprendedor/datos";
     }
     //Actualizar Informacion
     @PostMapping("/emprendedor/micuenta/datos-personales/actualizar")
@@ -70,7 +66,7 @@ public class UsuarioController {
         Usuario usuarioLogueado = (Usuario) session.getAttribute("usuario");
         if (result.hasErrors()) {
             model.addAttribute("error", result);
-            return "/Emprendedor/micuenta/datos-personales";
+            return "Emprendedor/datos";
         }
         usuario.setCodigo_rol(usuarioLogueado.getCodigo_rol());
         usuario.setContrasena(usuarioLogueado.getContrasena());
@@ -81,10 +77,8 @@ public class UsuarioController {
         } catch (IllegalArgumentException e) {
             model.addAttribute("errorMessage", e.getMessage());
         }
-        model.addAttribute("emprendimientos", new Emprendimientos());
         model.addAttribute("usuario", usuario);
-        model.addAttribute("mostrarDiv2", true); // Indicador para mostrar div1
-        return "/Emprendedor/micuenta";
+        return "Emprendedor/datos";
     }
 
     //Registro

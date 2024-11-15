@@ -20,14 +20,10 @@ import java.util.Date;
 public class SolicitudController {
 
     @Autowired
-    private UsuarioRepository usuarioRepository;
-    @Autowired
-    private UsuarioService usuarioService;
-    @Autowired
     private SolicitudService solicitudService;
 
 
-    //Actualizar Informacion
+
     @PostMapping("/emprendedor/micuenta/datos-personales/solicitud")
     public String solicitudDeshabilitar(@Valid @ModelAttribute("solicitud") Solicitudes solicitud,
                                         BindingResult result, Model model, HttpSession session) {
@@ -35,7 +31,7 @@ public class SolicitudController {
         Usuario usuarioLogueado = (Usuario) session.getAttribute("usuario");
         if (result.hasErrors()) {
             model.addAttribute("errorMessage", result);
-            return "/Emprendedor/micuenta/datos-personales";
+            return "Emprendedor/datos";
         }
         //Llenar informacion de solicitud
         solicitud.setDescripcion("Solicitud para deshabilitar cuenta");
@@ -46,13 +42,11 @@ public class SolicitudController {
         try {
             solicitudService.registrarSolicitud(solicitud);
             model.addAttribute("successMessage", "Solicitud Registrada");
+            model.addAttribute("usuario", usuarioLogueado);
         } catch (IllegalArgumentException e) {
             model.addAttribute("errorMessage", e.getMessage());
         }
-        model.addAttribute("emprendimiento", new Emprendimientos());
-        model.addAttribute("usuario", usuarioLogueado);
-        model.addAttribute("mostrarDiv2", true); // Indicador para mostrar div1
-        return "/Emprendedor/micuenta";
+        return "Emprendedor/datos";
     }
 
 

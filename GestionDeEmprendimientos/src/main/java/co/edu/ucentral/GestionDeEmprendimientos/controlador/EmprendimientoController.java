@@ -31,9 +31,8 @@ public class EmprendimientoController {
 
     @GetMapping("/emprendedor/micuenta/registrar-emprendimientos")
     public String registrarEmprendimientoDiv(Model model) {
-
         model.addAttribute("emprendimientos", new Emprendimientos());
-        return "/Emprendedor/datos";
+        return "Emprendedor/registrarEmp";
     }
 
     @PostMapping("/emprendedor/micuenta/registrar-emprendimientos")
@@ -46,7 +45,7 @@ public class EmprendimientoController {
         if (result.hasErrors()) {
             model.addAttribute("emprendimientos", emprendimientos);
             model.addAttribute("errorMessage", result);
-            return "/Emprendedor/datos";
+            return "Emprendedor/registrarEmp";
         }
 
         try {
@@ -56,14 +55,13 @@ public class EmprendimientoController {
                 String logoUrl = guardarArchivoYObtenerUrl(logoFile,documento);
                 emprendimientos.getImagenes().setLogo(logoUrl); // Asigna la URL del logo al campo de tipo String
             }
-
             emprendimientoService.registrarEmprendimiento(emprendimientos);
             model.addAttribute("successMessage", "Emprendimientos Registrado Correctamente");
         } catch (IllegalArgumentException e) {
             model.addAttribute("errorMessage", e.getMessage());
         }
 
-        return "redirect:/Emprendedor/datos";
+        return "Emprendedor/registrarEmp";
     }
 
     @GetMapping("/emprendimiento/ver")
@@ -75,7 +73,7 @@ public class EmprendimientoController {
 
     private String guardarArchivoYObtenerUrl(MultipartFile file, Integer documento) {
 
-        String carpetaDestino = "src/main/resources/static/assets/imagenes-emprendimientos/" + documento + "/";
+        String carpetaDestino = "src/main/resources/static/assets/imagenes-emprendimientos/logos" + documento + "/";
         String nombreArchivo = System.currentTimeMillis() + "_" + file.getOriginalFilename();
 
         try {
@@ -86,14 +84,12 @@ public class EmprendimientoController {
             Files.copy(file.getInputStream(), rutaArchivo, StandardCopyOption.REPLACE_EXISTING);
 
             // Retorna la URL relativa
-            return "/assets/imagenes-emprendimientos/" + documento + "/" + nombreArchivo;
+            return "/assets/imagenes-emprendimientos/logos" + documento + "/" + nombreArchivo;
         } catch (IOException e) {
             e.printStackTrace();
             throw new RuntimeException("Error al guardar el archivo", e);
         }
     }
-
-
 
 
 }
