@@ -1,4 +1,4 @@
-git pull<html xmlns:th="http://www.thymeleaf.org"
+<html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <html lang="en" data-bs-theme="auto">
 
@@ -16,33 +16,35 @@ git pull<html xmlns:th="http://www.thymeleaf.org"
 
     <div class="d-flex flex-column justify-content-center align-items-center flex-grow-1">
         <div class="container mt-4" style="max-width: 800px;">
-            <h2 class="text-dark text-center pb-5">Lista de Emprendimientos</h2>
+            <h2 class="text-dark text-center pb-5">Lista de usuarios</h2>
 
             <!-- Tabla -->
             <table class="table table-bordered table-striped">
                 <thead class="table-dark">
                 <tr>
-                    <th>Nombre</th>
-                    <th>NIT</th>
-                    <th>Categoria</th>
-                    <th>Estado</th>
-                    <th>Etapa</th>
-                    <th>Emprendedor</th>
-                    <th>Acciones</th>
+                    <th>numero_documento</th>
+                    <th>nombres</th>
+                    <th>apellidos</th>
+                    <th>tipo_documento</th>
+                    <th>correo</th>
+                    <th>numero_telefono</th>
+                    <th>fecha_nacimiento</th>
+                    <th>estado</th>
+                    <th>codigo_rol</th>
 
-                    <!--    Nombre del Emprendimientos, Nombre del Emprendedor, NIT, Categoría, Estado del emprendimientos, etapa,
-                      estado en el que se encuentra en el WorkFlow y un botón con la información adicional. La información
-                      se mostrará en forma de lista de cada uno de los emprendimientos registrados.-->
                   </tr>
                   </thead>
                   <tbody>
-                  <tr th:each="emprendimiento : ${emprendimientos}">
-                      <td th:text="${emprendimiento.nombreEmp}"></td>
-                      <td th:text="${emprendimiento.nit}"></td>
-                      <td th:text="${emprendimiento.estadoEmp}"></td>
-                      <td th:text="${emprendimiento.categoria}"></td>
-                      <td th:text="${emprendimiento.workFlow.etapa}"></td> <!-- Accediendo a la etapa de workFlow -->
-                      <td th:text="${emprendimiento.usuario.nombre}"></td> <!-- Accediendo al nombre del emprendedor -->
+                  <tr th:each="usuarios : ${usuario}">
+                      <td th:text="${usuarios.numeroDocumento}"></td>
+                      <td th:text="${usuarios.nombres}"></td>
+                      <td th:text="${usuarios.apellidos}"></td>
+                      <td th:text="${usuarios.tipoDocumento}"></td>
+                      <td th:text="${usuarios.correo}"></td>
+                      <td th:text="${usuarios.numeroTelefono}"></td>
+                      <td th:text="${usuarios.fechaNacimiento}"></td>
+                      <td th:text="${usuarios.estado}"></td>
+                      <td th:text="${usuarios.codigo_rol}"></td>
                       <td>
                           <button type="button" class="btn btn-warning btn-sm me-1">
                               Editar

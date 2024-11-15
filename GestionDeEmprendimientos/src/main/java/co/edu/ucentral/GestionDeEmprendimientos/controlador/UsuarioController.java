@@ -27,13 +27,13 @@ public class UsuarioController {
     @Autowired
     private RolRepository rolRepository;
 
-    @GetMapping("/usuarios")
+    @GetMapping("/Administrador/listausuarios/listausuarios")
     public String listarUsuarios(Model model) {
         List<Usuario> listaUsuarios = usuarioRepository.findAll();
 
-        model.addAttribute("usuarios", listaUsuarios);
+        model.addAttribute("usuario", listaUsuarios);
 
-        return "usuarios";
+        return "listausuarios/listausuarios";
     }
     @GetMapping("/emprendedor/micuenta")
     public String mostrarMicuenta(Model model, HttpSession session) {
