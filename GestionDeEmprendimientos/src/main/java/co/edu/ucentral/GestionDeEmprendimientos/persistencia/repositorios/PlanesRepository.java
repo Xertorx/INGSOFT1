@@ -11,4 +11,7 @@ import java.util.Optional;
 @Repository
 public interface PlanesRepository extends JpaRepository<Planes, Integer> {
     Optional<Planes> findBynombrePlan(String Plan);
+    Optional<Planes> findById(Integer id);
+
 }
+
