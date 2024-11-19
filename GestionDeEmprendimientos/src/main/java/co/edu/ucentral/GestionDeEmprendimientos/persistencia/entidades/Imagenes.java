@@ -17,6 +17,9 @@ public class Imagenes {
     @Transient
     private MultipartFile logoFile;
 
+    @Column(name = "banner")
+    private String banner;
+
     @Column(name = "imagen1")
     private String imagen1;
 
@@ -25,12 +28,5 @@ public class Imagenes {
 
     @Column(name = "imagen3")
     private String imagen3;
-
-    @Column(name = "imagen4")
-    private String imagen4;
-
-    @Column(name = "imagen5")
-    private String imagen5;
-
 
 }

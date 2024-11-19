@@ -32,5 +32,11 @@ public class PlanesService {
     public List<Planes> listarPlanes() {
         return planesRepository.findAll();
     }
+    @Transactional
+    public Planes buscarPlanPorId(Integer id) {
+        return planesRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("El plan con ID " + id + " no existe."));
+    }
+
 
 }
