@@ -1,5 +1,6 @@
 package co.edu.ucentral.GestionDeEmprendimientos.persistencia.servicios;
 
+import co.edu.ucentral.GestionDeEmprendimientos.persistencia.entidades.Emprendimientos;
 import co.edu.ucentral.GestionDeEmprendimientos.persistencia.entidades.Rol;
 import co.edu.ucentral.GestionDeEmprendimientos.persistencia.entidades.Usuario;
 import co.edu.ucentral.GestionDeEmprendimientos.persistencia.repositorios.RolRepository;
@@ -34,7 +35,7 @@ public class UsuarioService {
 
     @Transactional
     public Usuario registrarUsuario(Usuario usuario) {
-        Rol rolPredeterminado = rolRepository.findByCodigoRol(2);
+        Rol rolPredeterminado = rolRepository.findByCodigoRol(1);
 
         Optional<Usuario> usuarioExistente = usuarioRepository.findByCorreo(usuario.getCorreo());
 
@@ -61,7 +62,7 @@ public class UsuarioService {
 
     @Transactional
     public Usuario registrarUsuarioAdmin(Usuario usuario) {
-        Rol rolPredeterminado = rolRepository.findByCodigoRol(1);
+        Rol rolPredeterminado = rolRepository.findByCodigoRol(2);
         Optional<Usuario> usuarioExistente = usuarioRepository.findByCorreo(usuario.getCorreo());
 
         if (usuarioExistente.isPresent()) {
@@ -76,6 +77,14 @@ public class UsuarioService {
     public List<Usuario> obtenerUsuariosConRol2() {
         return usuarioRepository.findAllByCodigoRol(2);
 
+    }
+    public List<Usuario> obtenerUsuariosConRol1() {
+        return usuarioRepository.findAllByCodigoRol(1);
+
+    }
+    public Usuario findByCodigoUsuario(Integer documento) {
+        return usuarioRepository.findById(documento)
+                .orElseThrow(() -> new IllegalArgumentException("Emprendimiento no encontrado"));
     }
 
 }
