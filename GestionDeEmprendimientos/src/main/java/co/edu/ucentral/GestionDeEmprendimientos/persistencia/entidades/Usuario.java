@@ -48,8 +48,5 @@ public class Usuario {
     @JoinColumn(name = "rol",referencedColumnName = "codigo_rol" , nullable = false)
     private Rol codigo_rol;
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Solicitudes> solicitudes;
-
 }
 

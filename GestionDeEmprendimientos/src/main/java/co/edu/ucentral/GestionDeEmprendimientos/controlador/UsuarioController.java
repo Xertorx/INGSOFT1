@@ -42,8 +42,6 @@ public class UsuarioController {
         if (usuario == null) {
             return "redirect:../login";
         }
-        model.addAttribute("emprendimientos", new Emprendimientos());
-        model.addAttribute("usuario", usuario);
         return "Emprendedor/micuenta";
     }
 
@@ -57,10 +55,8 @@ public class UsuarioController {
             return "redirect:/login";
         }
 
-        model.addAttribute("emprendimientos", new Emprendimientos());
-        model.addAttribute("usuario", usuario);
-        model.addAttribute("mostrarDiv2", true); // Indicador para mostrar div1
-        return "Emprendedor/micuenta";
+        model.addAttribute("usuario",usuario);
+        return "Emprendedor/datos";
     }
     //Actualizar Informacion
     @PostMapping("/emprendedor/micuenta/datos-personales/actualizar")
@@ -70,7 +66,7 @@ public class UsuarioController {
         Usuario usuarioLogueado = (Usuario) session.getAttribute("usuario");
         if (result.hasErrors()) {
             model.addAttribute("error", result);
-            return "/Emprendedor/micuenta/datos-personales";
+            return "Emprendedor/datos";
         }
         usuario.setCodigo_rol(usuarioLogueado.getCodigo_rol());
         usuario.setContrasena(usuarioLogueado.getContrasena());
@@ -81,10 +77,8 @@ public class UsuarioController {
         } catch (IllegalArgumentException e) {
             model.addAttribute("errorMessage", e.getMessage());
         }
-        model.addAttribute("emprendimientos", new Emprendimientos());
         model.addAttribute("usuario", usuario);
-        model.addAttribute("mostrarDiv2", true); // Indicador para mostrar div1
-        return "/Emprendedor/micuenta";
+        return "Emprendedor/datos";
     }
 
     //Registro
@@ -169,7 +163,7 @@ public class UsuarioController {
         if (rolCodigo == 1) {
             return "redirect:/"; // Redirige a la página para rol 1
         } else if (rolCodigo == 2) {
-            return "redirect:/"; // Redirige a la página para rol 2
+            return "redirect:/LayoutAdmin"; // Redirige a la página para rol 2
         } else {
             model.addAttribute("error", "Rol no reconocido.");
             return "login";
@@ -180,5 +174,11 @@ public class UsuarioController {
         session.invalidate();
         status.setComplete();
         return "redirect:/";
+    }
+    @GetMapping("/administrador/verAdministradores")
+    public String listarUsuariosRol2(Model model) {
+        List<Usuario> usuariosRol2 = usuarioService.obtenerUsuariosConRol2();
+        model.addAttribute("usuarios", usuariosRol2);
+        return "Administrador/Emprendedores/verAdministradores";
     }
 }

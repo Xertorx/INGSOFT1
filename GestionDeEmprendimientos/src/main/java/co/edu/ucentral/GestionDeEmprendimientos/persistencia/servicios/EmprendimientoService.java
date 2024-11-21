@@ -28,4 +28,10 @@ public class EmprendimientoService {
         return emprendimientoRepository.findAll();
     }
 
+    @Transactional()
+    public Emprendimientos findByCodigoEmp(Integer codigoEmp) {
+        return emprendimientoRepository.findById(codigoEmp)
+                .orElseThrow(() -> new IllegalArgumentException("Emprendimiento no encontrado"));
+    }
+
 }

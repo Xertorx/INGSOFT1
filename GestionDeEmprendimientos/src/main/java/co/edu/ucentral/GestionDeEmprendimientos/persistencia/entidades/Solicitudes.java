@@ -33,7 +33,8 @@ public class Solicitudes {
     private String estado;
 
     @ManyToOne
-    @JoinColumn(name = "usuario",referencedColumnName = "numero_documento" , nullable = false)
+    @JoinColumn(name = "usuario", referencedColumnName = "numero_documento", nullable = false)
     private Usuario usuario;
+
 }
 

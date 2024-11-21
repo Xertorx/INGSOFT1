@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -70,6 +71,11 @@ public class UsuarioService {
             usuario.setEstado("Activo");
             return usuarioRepository.save(usuario);
         }
+    }
+
+    public List<Usuario> obtenerUsuariosConRol2() {
+        return usuarioRepository.findAllByCodigoRol(2);
+
     }
 
 }

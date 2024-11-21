@@ -52,6 +52,10 @@ public class Emprendimientos {
     private String email;
 
     @ManyToOne
+    @JoinColumn(name = "plan_id", referencedColumnName = "id_plan")
+    private Planes plan;
+
+    @ManyToOne
     @JoinColumn(name = "workflow_id", referencedColumnName = "id_workflow")
     private WorkFlow workFlow;
 
