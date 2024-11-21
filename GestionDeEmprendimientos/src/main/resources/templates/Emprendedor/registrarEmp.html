@@ -74,7 +74,7 @@
                      style="width: 4.5rem;">
                     <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
                         <li class="nav-item">
-                            <a th:href="@{/emprendedor/micuenta/registrar-emprendimientos}"
+                            <a th:href="@{/emprendedor/micuenta}"
                                class="nav-link py-5 border-bottom rounded-0" aria-current="page" title="Home"
                                data-bs-toggle="tooltip" data-bs-placement="right" onclick="setActive(this);">
                                 <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Home">
@@ -83,9 +83,9 @@
                             </a>
                         </li>
                         <li>
-                            <a th:href="@{/emprendedor/micuenta/datos-personales}"
+                            <a th:href="@{/emprendedor/micuenta/registrar-emprendimientos}"
                                class="nav-link py-5 border-bottom rounded-0"
-                               title="Dashboard" data-bs-toggle="tooltip"
+                               title="Emprendimiento" data-bs-toggle="tooltip"
                                data-bs-placement="right" onclick="setActive(this);">
                                 <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Dashboard">
                                     <use xlink:href="#speedometer2"/>
@@ -93,11 +93,12 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="nav-link py-5 border-bottom rounded-0" title="Orders"
+                            <a th:href="@{/emprendedor/micuenta/datos-personales}" title="datos"
+                               class="nav-link py-5 border-bottom rounded-0"
                                data-bs-toggle="tooltip"
                                data-bs-placement="right" onclick="setActive(this)">
-                                <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Orders">
-                                    <use xlink:href="#table"/>
+                                <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Customers">
+                                    <use xlink:href="#people-circle"/>
                                 </svg>
                             </a>
                         </li>
@@ -110,15 +111,7 @@
                                 </svg>
                             </a>
                         </li>
-                        <li>
-                            <a href="#" class="nav-link py-5 border-bottom rounded-0" title="Customers"
-                               data-bs-toggle="tooltip"
-                               data-bs-placement="right" onclick="setActive(this)">
-                                <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Customers">
-                                    <use xlink:href="#people-circle"/>
-                                </svg>
-                            </a>
-                        </li>
+
                     </ul>
                 </div>
             </div>
@@ -193,15 +186,7 @@
                                        th:field="*{fechaFundacion}" required/>
                             </div>
 
-                            <!-- Estado del Emprendimientos -->
-                            <div class="input-group mt-3">
-                                <select class="form-select bg-light" name="estado" th:field="*{estadoEmp}" required>
-                                    <option value="" selected disabled>Estado del Emprendimiento</option>
-                                    <option value="Activo">Activo</option>
-                                    <option value="Inactivo">Inactivo</option>
-                                    <option value="En crecimiento">En crecimiento</option>
-                                </select>
-                            </div>
+
 
                             <!-- Logo o Imagen Representativa -->
                             <div class="input-group mt-3">

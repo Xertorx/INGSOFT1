@@ -73,7 +73,7 @@
                      style="width: 4.5rem;">
                     <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
                         <li class="nav-item">
-                            <a th:href="@{/emprendedor/micuenta/registrar-emprendimientos}"
+                            <a th:href="@{/emprendedor/micuenta}"
                                class="nav-link py-5 border-bottom rounded-0" aria-current="page" title="Home"
                                data-bs-toggle="tooltip" data-bs-placement="right" onclick="setActive(this);">
                                 <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Home">
@@ -82,9 +82,9 @@
                             </a>
                         </li>
                         <li>
-                            <a th:href="@{/emprendedor/micuenta/datos-personales}"
+                            <a th:href="@{/emprendedor/micuenta/registrar-emprendimientos}"
                                class="nav-link py-5 border-bottom rounded-0"
-                               title="Dashboard" data-bs-toggle="tooltip"
+                               title="Emprendimiento" data-bs-toggle="tooltip"
                                data-bs-placement="right" onclick="setActive(this);">
                                 <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Dashboard">
                                     <use xlink:href="#speedometer2"/>
@@ -92,11 +92,12 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="nav-link py-5 border-bottom rounded-0" title="Orders"
+                            <a th:href="@{/emprendedor/micuenta/datos-personales}" title="datos"
+                               class="nav-link py-5 border-bottom rounded-0"
                                data-bs-toggle="tooltip"
                                data-bs-placement="right" onclick="setActive(this)">
-                                <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Orders">
-                                    <use xlink:href="#table"/>
+                                <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Customers">
+                                    <use xlink:href="#people-circle"/>
                                 </svg>
                             </a>
                         </li>
@@ -109,27 +110,35 @@
                                 </svg>
                             </a>
                         </li>
-                        <li>
-                            <a href="#" class="nav-link py-5 border-bottom rounded-0" title="Customers"
-                               data-bs-toggle="tooltip"
-                               data-bs-placement="right" onclick="setActive(this)">
-                                <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Customers">
-                                    <use xlink:href="#people-circle"/>
-                                </svg>
-                            </a>
-                        </li>
+
                     </ul>
                 </div>
             </div>
             <div class="flex-grow-1" id="contenedor" style="width: 60%;">
+                <div class="d-flex justify-content-center vh-50">
+                    <div class="bg-white p-5 rounded-5 text-secondary shadow" style="width: 60rem">
+                        <div class="d-flex justify-content-center">
+                            <img th:src="@{/assets/logo-icon.svg}" alt="logo-icon" style="height: 7rem" />
+                        </div>
+                        <div class="text-center fs-1 fw-bold text-success">Bienvenido</div>
+                        <div class="text-center fs-4 mt-3">
+                            Bienvenido a su espacio personal para la gestión de <strong>Emprendimiento</strong>.
+                        </div>
+                        <div class="mt-4">
+                            <ul class="list-unstyled text-secondary">
+                                <li class="mb-2">🟢 Gestiona y registra nuevos emprendimientos. </li>
+                                <li class="mb-2">🟢 Consulta el estado de tus proyectos actuales.</li>
+                                <li class="mb-2">🟢 Accede a herramientas personalizadas para emprendedores.</li>
+                            </ul>
+                        </div>
+                        <div class="d-flex justify-content-center mt-4">
+                            <a href="/emprendedor/micuenta" class="btn btn-success text-white fw-semibold shadow-sm">
+                                Ir a mi cuenta
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
-
-                <!-- Registrar Emprendimientos Form
-                <div th:replace="~{Emprendedor/registrarEmp :: registrarEmprendimiento}">
-                </div> -->
-                <!-- Informacion Cliente Form -->
-                <!-- <div th:replace="~{Emprendedor/datosUsuario :: datosPersonales}">
-                </div>-->
 
 
             </div>

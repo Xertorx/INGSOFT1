@@ -37,6 +37,11 @@ public class PlanesService {
         return planesRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("El plan con ID " + id + " no existe."));
     }
+    @Transactional
+    public void save(Planes plan) {
+        planesRepository.save(plan);
+    }
+
 
 
 }

@@ -10,7 +10,7 @@
 
 <main class="d-flex flex-nowrap">
 
-    <div th:replace="~{layoutAdmin :: main}">
+    <div th:replace="~{layoutAdmin :: main2}">
 
     </div>
 
@@ -66,20 +66,21 @@
                       </button>
 
                       </td>
+
                       <td>
-                          <button type="button" class="btn btn-warning btn-sm">
-                              Editar
-                          </button>
-                          <button type="button" class="btn btn-danger btn-sm">
-                              Inhabilitar
-                          </button>
-                          <button type="button" class="btn btn-danger btn-sm d-none">
-                              Inhabilitar
-                          </button>
-                          <button type="button" class="btn btn-danger btn-sm d-none">
-                              Habilitar
-                          </button>
+                          <!-- Cambiar estado a "Activo" -->
+                          <form th:action="@{/emprendimientos/{codigoEmp}/cambiar-estado(codigoEmp=${emprendimiento.codigoEmp})}" method="post" style="display: inline;">
+                              <input type="hidden" name="nuevoEstado" value="Activo">
+                              <button type="submit" class="btn btn-success btn-sm">Habilitar</button>
+                          </form>
+
+                          <!-- Cambiar estado a "Inactivo" -->
+                          <form th:action="@{/emprendimientos/{codigoEmp}/cambiar-estado(codigoEmp=${emprendimiento.codigoEmp})}" method="post" style="display: inline;">
+                              <input type="hidden" name="nuevoEstado" value="Inactivo">
+                              <button type="submit" class="btn btn-danger btn-sm">Inhabilitar</button>
+                          </form>
                       </td>
+
                   </tr>
                   </tbody>
               </table>

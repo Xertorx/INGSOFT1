@@ -10,19 +10,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.List;
 
 @AllArgsConstructor
 @Controller
@@ -32,6 +32,13 @@ public class EmprendimientoController {
     @Autowired
     private EmprendimientoService emprendimientoService;
 
+    @GetMapping({"/"})
+    public String mostrarEmprendimientos(Model model) {
+        List<Emprendimientos> emprendimientos =  emprendimientoService.listarEmprendimientos();
+
+        model.addAttribute("emprendimientos", emprendimientos);
+        return "index"; // Nombre del archivo HTML
+    }
 
     @GetMapping("/emprendedor/micuenta/registrar-emprendimientos")
     public String registrarEmprendimientoDiv(Model model) {
@@ -51,6 +58,8 @@ public class EmprendimientoController {
             String bannerUrl = guardarArchivoYObtenerUrl(emprendimientos.getImagenes().getLogoFile(), usuario.getNumeroDocumento(), "logo");
             emprendimientos.getImagenes().setLogo(bannerUrl);
         }
+        System.out.println(emprendimientos.getImagenes().getLogo());
+        emprendimientos.setEstadoEmp("En Crecimiento");
         session.setAttribute("emprendimientoPendiente", emprendimientos);
 
         if (result.hasErrors()) {
@@ -99,6 +108,7 @@ public class EmprendimientoController {
             // Guardar el banner en su propia carpeta
             if (bannerFile != null && !bannerFile.isEmpty()) {
                 String bannerUrl = guardarArchivoYObtenerUrl(bannerFile, usuario.getNumeroDocumento(), "banner");
+
                 emprendimiento.getImagenes().setBanner(bannerUrl);
             }
 
@@ -129,6 +139,13 @@ public class EmprendimientoController {
 
         return "redirect:/emprendedor/micuenta/registrar-emprendimientos";
     }
+    @GetMapping("/emprendimientos/{codigoEmp}")
+    public String verDetalle(@PathVariable("codigoEmp") Integer codigoEmp, Model model) {
+        Emprendimientos emprendimiento = emprendimientoService.findByCodigoEmp(codigoEmp);
+        model.addAttribute("emprendimiento", emprendimiento);
+        return "emprendimientoDetalles";
+    }
+
 
     private String guardarArchivoYObtenerUrl(MultipartFile file, Integer documento, String carpetaEspecifica) {
         // Crear carpeta específica para cada tipo de imagen
@@ -149,6 +166,30 @@ public class EmprendimientoController {
             throw new RuntimeException("Error al guardar el archivo", e);
         }
     }
+
+    @PostMapping("/emprendimientos/{codigoEmp}/cambiar-estado")
+    public String cambiarEstadoEmprendimiento(@PathVariable("codigoEmp") Integer codigoEmp,
+                                              @RequestParam("nuevoEstado") String nuevoEstado,
+                                              Model model) {
+
+        Emprendimientos emprendimiento = emprendimientoService.findByCodigoEmp(codigoEmp);
+        if (emprendimiento == null) {
+            model.addAttribute("errorMessage", "Emprendimiento no encontrado");
+            return "redirect:/emprendimiento/ver";
+        }
+
+        emprendimiento.setEstadoEmp(nuevoEstado);
+
+        // Guardar los cambios
+        emprendimientoService.registrarEmprendimiento(emprendimiento);
+
+        // Agregar un mensaje de éxito (opcional)
+        model.addAttribute("successMessage", "Estado actualizado con éxito");
+
+        // Redirigir de vuelta a la lista
+        return "redirect:/emprendimiento/ver";
+    }
+
 
 }
 

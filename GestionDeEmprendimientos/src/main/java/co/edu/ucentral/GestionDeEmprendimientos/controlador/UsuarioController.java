@@ -163,7 +163,7 @@ public class UsuarioController {
         if (rolCodigo == 1) {
             return "redirect:/"; // Redirige a la página para rol 1
         } else if (rolCodigo == 2) {
-            return "redirect:/"; // Redirige a la página para rol 2
+            return "redirect:/LayoutAdmin"; // Redirige a la página para rol 2
         } else {
             model.addAttribute("error", "Rol no reconocido.");
             return "login";
@@ -174,5 +174,11 @@ public class UsuarioController {
         session.invalidate();
         status.setComplete();
         return "redirect:/";
+    }
+    @GetMapping("/administrador/verAdministradores")
+    public String listarUsuariosRol2(Model model) {
+        List<Usuario> usuariosRol2 = usuarioService.obtenerUsuariosConRol2();
+        model.addAttribute("usuarios", usuariosRol2);
+        return "Administrador/Emprendedores/verAdministradores";
     }
 }

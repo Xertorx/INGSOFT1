@@ -17,7 +17,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -93,6 +95,26 @@ public class PlanesController {
 
         return "redirect:/emprendedor/micuenta/registrar-emprendimientos/imagenes-adicionales";
     }
+
+    @PostMapping("/administrador/planes/editar")
+    public String editarPlan(@RequestParam("idPlan") Integer idPlan,
+                             @RequestParam("nombrePlan") String nombrePlan,
+                             @RequestParam("precio") Float precio,
+                             @RequestParam("descripcion") String descripcion,
+                             RedirectAttributes redirectAttributes) {
+        Planes plan = planesService.buscarPlanPorId(idPlan);
+        if (plan != null) {
+            plan.setNombrePlan(nombrePlan);
+            plan.setPrecio(precio);
+            plan.setDescripcion(descripcion);
+            planesService.save(plan);
+            redirectAttributes.addFlashAttribute("successMessage", "Plan actualizado correctamente.");
+        } else {
+            redirectAttributes.addFlashAttribute("errorMessage", "Error al actualizar el plan.");
+        }
+        return "redirect:/planes/ver";
+    }
+
 
 
 }
