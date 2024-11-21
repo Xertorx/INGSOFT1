@@ -94,7 +94,7 @@ public class UsuarioController {
                                    BindingResult result, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("errorMessage", result);
-            return "registro";
+            return "redirect:/login";
 
         }
         try {
