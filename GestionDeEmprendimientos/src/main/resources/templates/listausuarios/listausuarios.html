@@ -10,7 +10,7 @@
 
 <main class="d-flex flex-nowrap">
 
-    <div th:replace="~{layoutAdmin :: main}">
+    <div th:replace="~{layoutAdmin :: main2}">
 
     </div>
 
@@ -30,7 +30,8 @@
                     <th>numero_telefono</th>
                     <th>fecha_nacimiento</th>
                     <th>estado</th>
-                    <th>codigo_rol</th>
+                    <th>rol</th>
+                    <td>Acciones</td>
 
                   </tr>
                   </thead>
@@ -44,14 +45,19 @@
                       <td th:text="${usuarios.numeroTelefono}"></td>
                       <td th:text="${usuarios.fechaNacimiento}"></td>
                       <td th:text="${usuarios.estado}"></td>
-                      <td th:text="${usuarios.codigo_rol}"></td>
+                      <td th:text="${usuarios.codigo_rol.rol}"></td>
                       <td>
-                          <button type="button" class="btn btn-warning btn-sm me-1">
-                              Editar
-                          </button>
-                          <button type="button" class="btn btn-danger btn-sm">
-                              Eliminar
-                          </button>
+                          <!-- Cambiar estado a "Activo" -->
+                          <form th:action="@{/usuario/{numeroDocumento}/cambiar-estado(numeroDocumento=${usuarios.numeroDocumento})}" method="post" style="display: inline;">
+                              <input type="hidden" name="nuevoEstado" value="Activo">
+                              <button type="submit" class="btn btn-success btn-sm">Habilitar</button>
+                          </form>
+
+                          <!-- Cambiar estado a "Inactivo" -->
+                          <form th:action="@{/usuario/{numeroDocumento}/cambiar-estado(numeroDocumento=${usuarios.numeroDocumento})}" method="post" style="display: inline;">
+                              <input type="hidden" name="nuevoEstado" value="Inactivo">
+                              <button type="submit" class="btn btn-danger btn-sm">Inhabilitar</button>
+                          </form>
                       </td>
                   </tr>
                   </tbody>

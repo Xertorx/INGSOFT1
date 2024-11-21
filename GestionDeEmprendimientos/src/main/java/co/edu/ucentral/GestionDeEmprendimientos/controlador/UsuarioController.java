@@ -107,23 +107,31 @@ public class UsuarioController {
 
         return "redirect:/login";
     }
+    @GetMapping("/administrador/verUsuarios")
+    public String verUsuarios(Model model) {
+        List<Usuario> usuariosRol1 = usuarioService.obtenerUsuariosConRol1();
+        model.addAttribute("usuario", usuariosRol1);
+
+        return "listausuarios/listausuarios";
+    }
 
     @GetMapping("/registroAdmin")
     public String registrarAdminPage(Model model) {
-        model.addAttribute("usuario", new Usuario());
+        model.addAttribute("usuarioAdmin", new Usuario());
         return "Administrador/registro";
     }
     @PostMapping("/registroAdmin")
-    public String registrarUsuarioAdmin(@Valid @ModelAttribute("usuario") Usuario usuario,
+    public String registrarUsuarioAdmin(@Valid @ModelAttribute("usuarioAdmin") Usuario usuario,
                                         BindingResult result, Model model) {
         if (result.hasErrors()) {
-            model.addAttribute("usuario", usuario); // Asegúrate de que el objeto usuario esté en el modelo
+            model.addAttribute("usuarioAdmin", usuario); // Asegúrate de que el objeto usuario esté en el modelo
             model.addAttribute("errorMessage", result);
             return "Administrador/registro";
         }
 
         try {
             usuario.setCodigo_rol(rolRepository.findByCodigoRol(2));
+            System.out.println(usuario.getCodigo_rol());
             usuarioService.registrarUsuarioAdmin(usuario);
             model.addAttribute("successMessage", "Usuario Registrado Correctamente");
         } catch (IllegalArgumentException e) {
@@ -133,7 +141,7 @@ public class UsuarioController {
         }
 
         // Redirigir a una vista de confirmación o lista de usuarios
-        return "redirect:/{registroAdmin}";
+        return "redirect:/registroAdmin";
     }
 
 
@@ -180,5 +188,28 @@ public class UsuarioController {
         List<Usuario> usuariosRol2 = usuarioService.obtenerUsuariosConRol2();
         model.addAttribute("usuarios", usuariosRol2);
         return "Administrador/Emprendedores/verAdministradores";
+    }
+
+    @PostMapping("/usuario/{numeroDocumento}/cambiar-estado")
+    public String cambiarEstadoUsuario(@PathVariable("numeroDocumento") Integer documento,
+                                              @RequestParam("nuevoEstado") String nuevoEstado,
+                                              Model model) {
+
+        Usuario Usuario = usuarioService.findByCodigoUsuario(documento);
+        if (Usuario == null) {
+            model.addAttribute("errorMessage", "Usuario no encontrado");
+            return "redirect:/administrador/verUsuarios";
+        }
+
+        Usuario.setEstado(nuevoEstado);
+
+        // Guardar los cambios
+        usuarioService.actualizarUsuario(Usuario);
+
+        // Agregar un mensaje de éxito (opcional)
+        model.addAttribute("successMessage", "Estado actualizado con éxito");
+
+        // Redirigir de vuelta a la lista
+        return "redirect:/administrador/verUsuarios";
     }
 }
