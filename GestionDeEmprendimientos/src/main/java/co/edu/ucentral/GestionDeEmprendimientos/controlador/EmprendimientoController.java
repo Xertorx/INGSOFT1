@@ -2,7 +2,9 @@ package co.edu.ucentral.GestionDeEmprendimientos.controlador;
 
 import co.edu.ucentral.GestionDeEmprendimientos.persistencia.entidades.Emprendimientos;
 import co.edu.ucentral.GestionDeEmprendimientos.persistencia.entidades.Usuario;
+import co.edu.ucentral.GestionDeEmprendimientos.persistencia.entidades.WorkFlow;
 import co.edu.ucentral.GestionDeEmprendimientos.persistencia.servicios.EmprendimientoService;
+import co.edu.ucentral.GestionDeEmprendimientos.persistencia.servicios.WorkFlowService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -31,6 +33,8 @@ public class EmprendimientoController {
 
     @Autowired
     private EmprendimientoService emprendimientoService;
+    @Autowired
+    private WorkFlowService wkService;
 
     @GetMapping({"/"})
     public String mostrarEmprendimientos(Model model) {
@@ -58,7 +62,7 @@ public class EmprendimientoController {
             String bannerUrl = guardarArchivoYObtenerUrl(emprendimientos.getImagenes().getLogoFile(), usuario.getNumeroDocumento(), "logo");
             emprendimientos.getImagenes().setLogo(bannerUrl);
         }
-        System.out.println(emprendimientos.getImagenes().getLogo());
+
         emprendimientos.setEstadoEmp("En Crecimiento");
         session.setAttribute("emprendimientoPendiente", emprendimientos);
 
@@ -130,6 +134,9 @@ public class EmprendimientoController {
                 emprendimiento.getImagenes().setImagen3(image3Url);
             }
 
+            // 1. Crear un Workflow inicial
+            WorkFlow workflow = wkService.crearWorkflowInicial();
+            emprendimiento.setWorkFlow(workflow);
             emprendimientoService.registrarEmprendimiento(emprendimiento);
             model.addAttribute("successMessage", "Imágenes cargadas correctamente.");
         } catch (RuntimeException e) {

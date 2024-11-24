@@ -17,26 +17,13 @@ public class Etapa {
     @Column(name = "id_etapa", updatable = false, nullable = false)
     private Integer idEtapa;
 
-    @ManyToOne
-    @JoinColumn(name = "workflow_id", nullable = false)
-    private WorkFlow workFlow;
-
     @Column(name = "titulo")
     private String titulo;
 
     @Column(name = "descripcion")
     private String descripcion;
 
-    @Column(name = "estado")
-    private String estado;
+    public void setNombre(String inicio) {
 
-    @Column(name = "informacion")
-    private String informacion;
-
-    @Lob
-    @Column(name = "archivo", columnDefinition = "BYTEA")
-    private byte[] archivo;
-
-    @Column(name = "tipo_archivo")
-    private String tipoArchivo;
+    }
 }

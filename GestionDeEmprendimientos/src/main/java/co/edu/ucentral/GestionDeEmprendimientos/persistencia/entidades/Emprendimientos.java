@@ -26,7 +26,7 @@ public class Emprendimientos {
     @Column(name = "nit")
     private String nit;
 
-    @Column(name = "descripcion")
+    @Column(name = "descripcion", columnDefinition = "TEXT")
     private String descripcion;
 
     @Column(name = "categoria")

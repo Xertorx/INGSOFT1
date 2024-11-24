@@ -2,8 +2,11 @@ package co.edu.ucentral.GestionDeEmprendimientos.controlador;
 
 import co.edu.ucentral.GestionDeEmprendimientos.persistencia.entidades.Emprendimientos;
 import co.edu.ucentral.GestionDeEmprendimientos.persistencia.entidades.Usuario;
+import co.edu.ucentral.GestionDeEmprendimientos.persistencia.entidades.WorkFlow;
+import co.edu.ucentral.GestionDeEmprendimientos.persistencia.repositorios.EmprendimientoRepository;
 import co.edu.ucentral.GestionDeEmprendimientos.persistencia.repositorios.RolRepository;
 import co.edu.ucentral.GestionDeEmprendimientos.persistencia.repositorios.UsuarioRepository;
+import co.edu.ucentral.GestionDeEmprendimientos.persistencia.servicios.EmprendimientoService;
 import co.edu.ucentral.GestionDeEmprendimientos.persistencia.servicios.UsuarioService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -26,6 +29,11 @@ public class UsuarioController {
     private UsuarioService usuarioService;
     @Autowired
     private RolRepository rolRepository;
+    @Autowired
+    private  EmprendimientoRepository emprendimientoRepository;
+
+
+
 
     @GetMapping("/Administrador/listausuarios/listausuarios")
     public String listarUsuarios(Model model) {
@@ -42,8 +50,32 @@ public class UsuarioController {
         if (usuario == null) {
             return "redirect:../login";
         }
+
+        // Recuperar el emprendimiento asociado al usuario
+        Emprendimientos emprendimiento = emprendimientoRepository.findByUsuario(usuario);
+
+        if (emprendimiento != null) {
+            // Obtener el Workflow asociado al emprendimiento
+            WorkFlow workflow = emprendimiento.getWorkFlow();
+
+            if (workflow != null) {
+                // Almacenar el Workflow en la sesión
+                session.setAttribute("workflow", workflow);
+
+                // Obtener y agregar la etapa asociada al Workflow al modelo
+                Integer idEtapa = workflow.getEtapa().getIdEtapa();
+                model.addAttribute("idEtapaWorkflow", idEtapa);
+            } else {
+                model.addAttribute("idEtapaWorkflow", null);
+            }
+        } else {
+            model.addAttribute("idEtapaWorkflow", null);
+        }
+
         return "Emprendedor/micuenta";
     }
+
+
 
     //Mostrar Informacion del usuario logueado
     @GetMapping("/emprendedor/micuenta/datos-personales")
@@ -95,7 +127,6 @@ public class UsuarioController {
         if (result.hasErrors()) {
             model.addAttribute("errorMessage", result);
             return "redirect:/login";
-
         }
         try {
             usuario.setCodigo_rol(rolRepository.findByCodigoRol(1));

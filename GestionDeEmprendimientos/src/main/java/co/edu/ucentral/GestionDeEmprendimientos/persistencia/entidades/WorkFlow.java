@@ -19,9 +19,19 @@ public class WorkFlow {
     @Column(name = "id_workflow", updatable = false, nullable = false)
     private Integer idWorkFlow;
 
+    @Column(name = "estado")
+    private String estado;
+
     @OneToOne(mappedBy = "workFlow")
     private Emprendimientos emprendimiento;
 
-    @OneToMany(mappedBy = "workFlow")
-    private List<Etapa> etapas;
+    @ManyToOne
+    @JoinColumn(name = "etapa",referencedColumnName = "id_etapa" , nullable = false)
+    private Etapa etapa;
+
+    @Embedded
+    private Archivos archivos;
+    @Embedded
+    private Informacion informacion;
+
 }
