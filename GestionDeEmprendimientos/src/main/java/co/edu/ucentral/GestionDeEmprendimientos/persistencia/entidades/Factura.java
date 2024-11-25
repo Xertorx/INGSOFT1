@@ -2,18 +2,38 @@ package co.edu.ucentral.GestionDeEmprendimientos.persistencia.entidades;
 
 import java.util.Date;
 
+import jakarta.persistence.*;
+import lombok.*;
+import java.util.Date;
+
+@Entity
+@Table(name = "factura")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Factura {
-    // Atributos
-    private int idFactura;
-    private float monto;
+
+    @Id
+    @Column(name = "id_factura")
+    private Integer idFactura;
+
+    @Column(name = "monto")
+    private Float monto;
+
+    @Column(name = "fecha")
+    @Temporal(TemporalType.DATE)
     private Date fecha;
+
+    @Column(name = "estado")
     private String estado;
 
-    // Constructor
-    public Factura(int idFactura, float monto, Date fecha, String estado) {
-        this.idFactura = idFactura;
-        this.monto = monto;
-        this.fecha = fecha;
-        this.estado = estado;
-    }
+    @ManyToOne
+    @JoinColumn(name = "id_plan")
+    private Planes plan;
+
+    @ManyToOne
+    @JoinColumn(name = "id_metodo")
+    private MetodoPago metodoPago;
 }
+
